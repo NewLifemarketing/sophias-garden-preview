@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Barrie, Ontario — Sophia’s Garden Artisan</title>
+<meta name="description" content="Sophia's Garden Artisan cannabinoid chocolate in Barrie, Ontario: availability through authorized retailers, product specifications and information for stores. 19+.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="googlebot" content="noindex, nofollow">
+<meta property="og:title" content="Barrie, Ontario — Sophia’s Garden Artisan">
+<meta property="og:description" content="Sophia's Garden Artisan cannabinoid chocolate in Barrie, Ontario: availability through authorized retailers, product specifications and information for stores. 19+.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="">
+<meta name="rating" content="adult">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/sophias-garden-preview/static/style.css?v=6b194b5e">
+<script src="/sophias-garden-preview/static/interactions.js?v=6b194b5e" defer></script>
+</head>
+<body>
+<div class="age-gate" id="ageGate" role="dialog" aria-modal="true" aria-labelledby="agTitle" hidden>
+ <div class="ag-card">
+ <div class="ag-mark"><img class="brand-mark" src="/sophias-garden-preview/static/img/logo-vertical-negative.png" alt="Sophia’s Garden Artisan"></div>
+ <h1 id="agTitle">Confirm your age to enter</h1>
+ <p class="ag-sub">This website contains information about cannabis products and is intended for adults of legal age in Canada.</p>
+ <form class="ag-form" id="agForm" novalidate>
+ <div class="ag-field">
+ <label for="agProv">Province or territory</label>
+ <select id="agProv" name="province" required>
+ <option value="" selected disabled>Select…</option>
+ <option value="AB">Alberta</option><option value="BC">British Columbia</option><option value="MB">Manitoba</option><option value="NB">New Brunswick</option><option value="NL">Newfoundland and Labrador</option><option value="NS">Nova Scotia</option><option value="NT">Northwest Territories</option><option value="NU">Nunavut</option><option value="ON">Ontario</option><option value="PE">Prince Edward Island</option><option value="QC">Quebec</option><option value="SK">Saskatchewan</option><option value="YT">Yukon</option>
+ </select>
+ </div>
+ <div class="ag-field">
+ <label for="agDob">Date of birth</label>
+ <div class="ag-dob">
+ <input type="text" id="agDay" inputmode="numeric" maxlength="2" placeholder="DD" aria-label="Day" required>
+ <input type="text" id="agMonth" inputmode="numeric" maxlength="2" placeholder="MM" aria-label="Month" required>
+ <input type="text" id="agYear" inputmode="numeric" maxlength="4" placeholder="YYYY" aria-label="Year" required>
+ </div>
+ </div>
+ <p class="ag-error" id="agError" role="alert" hidden></p>
+ <button class="btn btn-solid" type="submit" id="agSubmit">Enter site</button>
+ </form>
+ <p class="ag-fine">We ask only to confirm you are of legal age. Your date of birth is checked in your browser and is not stored or sent to us.</p>
+ </div>
+</div>
+<script>
+(function () {
+ var MIN = {"AB": 18, "BC": 19, "MB": 19, "NB": 19, "NL": 19, "NS": 19, "NT": 19, "NU": 19, "ON": 19, "PE": 19, "QC": 21, "SK": 19, "YT": 19};
+ var gate = document.getElementById('ageGate');
+ var form = document.getElementById('agForm');
+ var err = document.getElementById('agError');
+ // Session-only pass: the visitor is NOT remembered between visits, which
+ // is what lets SGA measure repeat access (Legend s.3).
+ function passed() {
+ try { return sessionStorage.getItem('sga_age_ok') === '1'; }
+ catch (e) { return false; }
+ }
+ if (passed()) return;
+ gate.hidden = false;
+ document.documentElement.classList.add('ag-lock');
+
+ function fail(msg) { err.textContent = msg; err.hidden = false; }
+
+ form.addEventListener('submit', function (ev) {
+ ev.preventDefault();
+ err.hidden = true;
+ var prov = document.getElementById('agProv').value;
+ var d = parseInt(document.getElementById('agDay').value, 10);
+ var m = parseInt(document.getElementById('agMonth').value, 10);
+ var y = parseInt(document.getElementById('agYear').value, 10);
+ if (!prov) { return fail('Please select your province or territory.'); }
+ if (!d || !m || !y || y < 1900) { return fail('Please enter your full date of birth.'); }
+ var dob = new Date(y, m - 1, d);
+ if (dob.getDate() !== d || dob.getMonth() !== m - 1 || dob.getFullYear() !== y) {
+ return fail('That date does not look right. Please check and try again.');
+ }
+ var now = new Date();
+ var age = now.getFullYear() - y;
+ var before = (now.getMonth() < m - 1) || (now.getMonth() === m - 1 && now.getDate() < d);
+ if (before) { age--; }
+ var need = MIN[prov] || 19;
+ if (age < need) {
+ // A visitor who does not meet the age requirement goes nowhere.
+ return fail('You must be ' + need + ' or older to enter this site in that province.');
+ }
+ try { sessionStorage.setItem('sga_age_ok', '1'); } catch (e) {}
+ gate.hidden = true;
+ document.documentElement.classList.remove('ag-lock');
+ });
+})();
+</script>
+<div class="topbar">
+ <div class="wrap topbar-inner">
+ <a href="/sophias-garden-preview/contact/">Contact Us</a>
+ <a href="/sophias-garden-preview/blog/">Blog</a>
+ <a href="/sophias-garden-preview/servicing-areas/">Servicing Areas</a>
+ </div>
+</div>
+<header class="site-header">
+ <div class="wrap header-inner">
+ <a class="logo" href="/sophias-garden-preview/" aria-label="Sophia’s Garden Artisan — home">
+ <img class="brand-logo" src="/sophias-garden-preview/static/img/logo.png" alt="Sophia’s Garden Artisan">
+ </a>
+ <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false"></button>
+ <nav class="site-nav" id="siteNav" aria-label="Main">
+ <a href="/sophias-garden-preview/">Home</a>
+ <div class="nav-drop">
+ <a href="/sophias-garden-preview/products/">Our Products</a>
+ <ul class="drop-menu"><li><a href="/sophias-garden-preview/products/micro-zen/">Micro Zen</a></li><li><a href="/sophias-garden-preview/products/micro-zest/">Micro Zest</a></li></ul>
+ </div>
+ <div class="nav-drop">
+ <a href="/sophias-garden-preview/our-story/">Company</a>
+ <ul class="drop-menu"><li><a href="/sophias-garden-preview/chocolate-innovation-lab/">Chocolate Innovation Lab</a></li><li><a href="/sophias-garden-preview/cannabinoid-formulation-science/">Formulation Science</a></li><li><a href="/sophias-garden-preview/canadian-craft-manufacturing/">Craft Manufacturing</a></li><li><a href="/sophias-garden-preview/responsible-consumption/">Responsible Consumption</a></li></ul>
+ </div>
+ <a href="/sophias-garden-preview/education/">Education</a>
+ <a href="/sophias-garden-preview/where-to-buy/">Where to Buy</a>
+ <a href="/sophias-garden-preview/for-retailers/">For Retailers</a>
+ <a class="nav-login" href="/sophias-garden-preview/retailer-portal/">Retailer Login</a>
+ <a class="nav-login nav-login-alt" href="/sophias-garden-preview/investor-portal/">Investor Login</a>
+ </nav>
+ </div>
+</header>
+
+<nav class="crumbs" aria-label="Breadcrumb">
+ <div class="wrap">
+ <a href="/sophias-garden-preview/servicing-areas/">Servicing areas</a> <span>/</span>
+ <span>Simcoe County & York Region</span> <span>/</span> <strong>Barrie</strong>
+ </div>
+</nav>
+
+<section class="page-hero">
+ <div class="wrap">
+ <p class="kicker">Simcoe County & York Region</p>
+ <h1>Sophia’s Garden Artisan in Barrie</h1>
+ <p class="hero-sub">On Kempenfelt Bay at the south end of Lake Simcoe, on the main route north.</p>
+ </div>
+</section>
+
+<section class="section">
+ <div class="wrap narrow">
+ <p class="kicker" data-reveal>Availability</p>
+ <h2 data-reveal>How our products reach Barrie</h2>
+ <p data-reveal><strong>The largest centre between Toronto and Muskoka and a natural distribution point.</strong></p>
+ <p data-reveal>Our chocolates are manufactured in Thunder Bay and distributed across Ontario through the provincial system. Authorized cannabis retailers in Barrie order them from the provincial catalogue and sell them in store. We do not sell to the public in any city. Our products are ordered by authorized cannabis retailers through the provincial catalogue and sold in their stores.</p>
+
+ <p class="kicker" data-reveal style="margin-top:2rem">Simcoe County & York Region</p>
+ <h2 data-reveal>Distribution across the region</h2>
+ <p data-reveal>This corridor is where northern Ontario traffic meets the Greater Toronto Area, and retail reflects both. Barrie and Newmarket anchor dense local catchments while also serving people travelling further north, which gives stores here an unusually mixed customer base.</p>
+ <p class="aside-link" data-reveal>Looking for a store? See <a href="/sophias-garden-preview/where-to-buy/">where to buy</a>.</p>
+ </div>
+</section>
+
+<section class="section section-tint">
+ <div class="wrap">
+ <p class="kicker" data-reveal>The line</p>
+ <h2 data-reveal>What is available in Barrie</h2>
+ <div class="area-prods" data-reveal data-reveal-delay="80">
+ <a class="area-prod" href="/sophias-garden-preview/products/micro-zest/" style="--drop:#E6833C">
+ <h3>MICRO ZEST</h3>
+ <p class="prod-meta">Balanced THC:CBG Yuzu Chocolate</p>
+ <p class="prod-dose">1 mg THC / 1 mg CBG per unit</p>
+ <span class="text-link">Specifications &rarr;</span>
+ </a>
+ <a class="area-prod" href="/sophias-garden-preview/products/micro-zen/" style="--drop:#84C28D">
+ <h3>MICRO ZEN</h3>
+ <p class="prod-meta">Balanced THC:CBD Milk Chocolate</p>
+ <p class="prod-dose">1 mg THC / 1 mg CBD per unit</p>
+ <span class="text-link">Specifications &rarr;</span>
+ </a></div>
+ </div>
+</section>
+
+<section class="section">
+ <div class="wrap split">
+ <div data-reveal="left">
+ <p class="kicker">The company</p>
+ <h2>Who makes it</h2>
+ <p>The cannabinoid chocolate innovation company. We are a premium edible and extract lab in Thunder Bay, and these are the parts of the business behind what reaches Barrie.</p>
+ <ul class="area-list"><li><a href="/sophias-garden-preview/chocolate-innovation-lab/">Chocolate Innovation Lab</a> &mdash; Where the formats are developed</li><li><a href="/sophias-garden-preview/cannabinoid-formulation-science/">Formulation Science</a> &mdash; The science behind the format</li><li><a href="/sophias-garden-preview/canadian-craft-manufacturing/">Craft Manufacturing</a> &mdash; Made in Thunder Bay</li><li><a href="/sophias-garden-preview/responsible-consumption/">Responsible Consumption</a> &mdash; Precision dose, by design</li></ul>
+ </div>
+ <div data-reveal="right">
+ <p class="kicker">Education</p>
+ <h2>Understanding the format</h2>
+ <p>Start with <strong>how edibles work</strong> &mdash; the mechanical difference between an edible and an inhaled format.</p>
+ <ul class="area-list"><li><a href="/sophias-garden-preview/education/#theme-2">How edibles work</a></li><li><a href="/sophias-garden-preview/education/#theme-3">Differences between THC and CBD</a></li><li><a href="/sophias-garden-preview/education/#theme-4">Chocolate formulation science</a></li><li><a href="/sophias-garden-preview/education/#theme-1">Cannabinoids explained</a></li></ul>
+ </div>
+ </div>
+</section>
+
+<section class="section section-tint">
+ <div class="wrap narrow">
+ <p class="kicker" data-reveal>For retailers in Barrie</p>
+ <h2 data-reveal>Stocking Sophia’s Garden Artisan</h2>
+ <p data-reveal>40–70% of purchasing decisions in Canada are influenced by budtenders, so everything we produce for the trade is built for the counter: product knowledge guides, cannabinoid education cards, comparison charts and point-of-sale material.</p>
+ <p data-reveal><a class="btn btn-solid" href="/sophias-garden-preview/for-retailers/#portal">Retailer &amp; budtender portal</a></p>
+ </div>
+</section>
+
+<section class="section">
+ <div class="wrap narrow">
+ <p class="kicker" data-reveal>Questions</p>
+ <h2 data-reveal>Barrie &mdash; common questions</h2>
+ <div data-reveal data-reveal-delay="60">
+ <details class="faq">
+ <summary>Is the range the same as in Toronto?</summary>
+ <p>The products we supply to the provincial system are identical province wide. What differs is which stores choose to range them, which is a decision each retailer makes independently.</p>
+ </details>
+ <details class="faq">
+ <summary>Where can I buy Sophia’s Garden Artisan in Barrie?</summary>
+ <p>Through authorized cannabis retailers in Barrie. Like every licensed producer in Ontario, we supply the provincial system and stores order from it — we do not sell to the public directly, and we do not ship or deliver.</p>
+ </details>
+ <details class="faq">
+ <summary>Which products are available in Barrie?</summary>
+ <p>MICRO ZEN, a balanced THC:CBD milk chocolate, and MICRO ZEST, a balanced THC:CBG yuzu chocolate. Both are formulated at 1 mg of each cannabinoid per unit, ten units to a pack. Whether a particular store carries them is that retailer’s decision.</p>
+ </details>
+ <details class="faq">
+ <summary>Are the products made in Barrie?</summary>
+ <p>No. Everything is manufactured at our facility in Thunder Bay, then distributed through the provincial system to retailers in Barrie.</p>
+ </details>
+ <details class="faq">
+ <summary>I run a store in Barrie. How do I stock them?</summary>
+ <p>Register for a retailer account with your work email and order through the provincial catalogue. The portal carries sell sheets, spec sheets, certificates of analysis and point-of-sale material.</p>
+ </details></div>
+ </div>
+</section>
+
+<section class="section section-tint">
+ <div class="wrap" data-reveal>
+ <p class="kicker">Nearby</p>
+ <h2>Other areas in Simcoe County & York Region</h2>
+ <div class="city-chips"><a class="city-chip" href="/sophias-garden-preview/servicing-areas/orillia/">Orillia</a><a class="city-chip" href="/sophias-garden-preview/servicing-areas/bradford/">Bradford</a><a class="city-chip" href="/sophias-garden-preview/servicing-areas/newmarket/">Newmarket</a><a class="city-chip" href="/sophias-garden-preview/servicing-areas/aurora/">Aurora</a><a class="city-chip" href="/sophias-garden-preview/servicing-areas/vaughan/">Vaughan</a></div>
+ <p class="aside-link"><a href="/sophias-garden-preview/servicing-areas/">All servicing areas &rarr;</a></p>
+ </div>
+</section>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is the range the same as in Toronto?","acceptedAnswer":{"@type":"Answer","text":"The products we supply to the provincial system are identical province wide. What differs is which stores choose to range them, which is a decision each retailer makes independently."}},{"@type":"Question","name":"Where can I buy Sophia\u2019s Garden Artisan in Barrie?","acceptedAnswer":{"@type":"Answer","text":"Through authorized cannabis retailers in Barrie. Like every licensed producer in Ontario, we supply the provincial system and stores order from it \u2014 we do not sell to the public directly, and we do not ship or deliver."}},{"@type":"Question","name":"Which products are available in Barrie?","acceptedAnswer":{"@type":"Answer","text":"MICRO ZEN, a balanced THC:CBD milk chocolate, and MICRO ZEST, a balanced THC:CBG yuzu chocolate. Both are formulated at 1 mg of each cannabinoid per unit, ten units to a pack. Whether a particular store carries them is that retailer\u2019s decision."}},{"@type":"Question","name":"Are the products made in Barrie?","acceptedAnswer":{"@type":"Answer","text":"No. Everything is manufactured at our facility in Thunder Bay, then distributed through the provincial system to retailers in Barrie."}},{"@type":"Question","name":"I run a store in Barrie. How do I stock them?","acceptedAnswer":{"@type":"Answer","text":"Register for a retailer account with your work email and order through the provincial catalogue. The portal carries sell sheets, spec sheets, certificates of analysis and point-of-sale material."}}]}</script>
+<footer class="site-footer">
+ <div class="wrap">
+ <div class="foot-warning">
+ <strong>Health warning</strong>
+ 
+ </div>
+ <div class="foot-grid">
+ <div class="foot-brand">
+ <img class="brand-mark" src="/sophias-garden-preview/static/img/logo-vertical-negative.png" alt="Sophia’s Garden Artisan">
+ <p class="foot-name">Sophia's Garden (Artisan) Inc.</p>
+ <p>600 Montreal St., Thunder Bay, ON P7E 6P8, Canada</p>
+ <p><a href="tel:+18558885877">+1 (855) 888-5877</a><br>
+ <a href="mailto:contact@sophiasartisan.com">contact@sophiasartisan.com</a></p>
+ <p>Licensed by Health Canada &middot; Federally licensed producer</p>
+ </div>
+ <div class="foot-col">
+ <h4>Explore</h4>
+ <a href="/sophias-garden-preview/products/">Our Products</a>
+ <a href="/sophias-garden-preview/our-story/">Company Story</a>
+ <a href="/sophias-garden-preview/chocolate-innovation-lab/">Chocolate Innovation Lab</a>
+ <a href="/sophias-garden-preview/cannabinoid-formulation-science/">Formulation Science</a>
+ <a href="/sophias-garden-preview/canadian-craft-manufacturing/">Craft Manufacturing</a>
+ <a href="/sophias-garden-preview/responsible-consumption/">Responsible Consumption</a>
+ <a href="/sophias-garden-preview/education/">Education</a>
+ <a href="/sophias-garden-preview/blog/">Blog</a>
+ <a href="/sophias-garden-preview/where-to-buy/">Where to Buy</a>
+ <a href="/sophias-garden-preview/servicing-areas/">Servicing Areas</a>
+ <a href="/sophias-garden-preview/for-retailers/">For Retailers</a>
+ <a href="/sophias-garden-preview/retailer-portal/">Retailer Login</a>
+ <a href="/sophias-garden-preview/investor-portal/">Investor Login</a>
+ <a href="/sophias-garden-preview/contact/">Contact</a>
+ </div>
+ <div class="foot-col">
+ <h4>Legal</h4>
+ <a href="/sophias-garden-preview/privacy/">Privacy Policy</a>
+ <a href="/sophias-garden-preview/terms/">Terms of Use</a>
+ <a href="/sophias-garden-preview/accessibility/">Accessibility</a>
+ 
+ </div>
+ </div>
+ <div class="foot-bottom">
+ <p>19+ &mdash; This site is intended for adults of legal age in Canada. Cannabis products are sold only through authorized retailers.</p>
+ <p>&copy; 2026 Sophia's Garden (Artisan) Inc. All rights reserved. Site by <a href="https://newlifemarketing.ca">Newlife Marketing</a>.</p>
+ </div>
+ </div>
+</footer>
+<script>
+(function () {
+ var t = document.getElementById('navToggle'), n = document.getElementById('siteNav');
+ t.addEventListener('click', function () {
+ var open = n.classList.toggle('open');
+ t.setAttribute('aria-expanded', open ? 'true' : 'false');
+ });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Education — Sophia’s Garden Artisan</title>
+<meta name="description" content="Cannabinoids explained, how edibles work, the differences between THC and CBD, and chocolate formulation science. 19+.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="googlebot" content="noindex, nofollow">
+<meta property="og:title" content="Education — Sophia’s Garden Artisan">
+<meta property="og:description" content="Cannabinoids explained, how edibles work, the differences between THC and CBD, and chocolate formulation science. 19+.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="">
+<meta name="rating" content="adult">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/sophias-garden-preview/static/style.css?v=6b194b5e">
+<script src="/sophias-garden-preview/static/interactions.js?v=6b194b5e" defer></script>
+</head>
+<body>
+<div class="age-gate" id="ageGate" role="dialog" aria-modal="true" aria-labelledby="agTitle" hidden>
+ <div class="ag-card">
+ <div class="ag-mark"><img class="brand-mark" src="/sophias-garden-preview/static/img/logo-vertical-negative.png" alt="Sophia’s Garden Artisan"></div>
+ <h1 id="agTitle">Confirm your age to enter</h1>
+ <p class="ag-sub">This website contains information about cannabis products and is intended for adults of legal age in Canada.</p>
+ <form class="ag-form" id="agForm" novalidate>
+ <div class="ag-field">
+ <label for="agProv">Province or territory</label>
+ <select id="agProv" name="province" required>
+ <option value="" selected disabled>Select…</option>
+ <option value="AB">Alberta</option><option value="BC">British Columbia</option><option value="MB">Manitoba</option><option value="NB">New Brunswick</option><option value="NL">Newfoundland and Labrador</option><option value="NS">Nova Scotia</option><option value="NT">Northwest Territories</option><option value="NU">Nunavut</option><option value="ON">Ontario</option><option value="PE">Prince Edward Island</option><option value="QC">Quebec</option><option value="SK">Saskatchewan</option><option value="YT">Yukon</option>
+ </select>
+ </div>
+ <div class="ag-field">
+ <label for="agDob">Date of birth</label>
+ <div class="ag-dob">
+ <input type="text" id="agDay" inputmode="numeric" maxlength="2" placeholder="DD" aria-label="Day" required>
+ <input type="text" id="agMonth" inputmode="numeric" maxlength="2" placeholder="MM" aria-label="Month" required>
+ <input type="text" id="agYear" inputmode="numeric" maxlength="4" placeholder="YYYY" aria-label="Year" required>
+ </div>
+ </div>
+ <p class="ag-error" id="agError" role="alert" hidden></p>
+ <button class="btn btn-solid" type="submit" id="agSubmit">Enter site</button>
+ </form>
+ <p class="ag-fine">We ask only to confirm you are of legal age. Your date of birth is checked in your browser and is not stored or sent to us.</p>
+ </div>
+</div>
+<script>
+(function () {
+ var MIN = {"AB": 18, "BC": 19, "MB": 19, "NB": 19, "NL": 19, "NS": 19, "NT": 19, "NU": 19, "ON": 19, "PE": 19, "QC": 21, "SK": 19, "YT": 19};
+ var gate = document.getElementById('ageGate');
+ var form = document.getElementById('agForm');
+ var err = document.getElementById('agError');
+ // Session-only pass: the visitor is NOT remembered between visits, which
+ // is what lets SGA measure repeat access (Legend s.3).
+ function passed() {
+ try { return sessionStorage.getItem('sga_age_ok') === '1'; }
+ catch (e) { return false; }
+ }
+ if (passed()) return;
+ gate.hidden = false;
+ document.documentElement.classList.add('ag-lock');
+
+ function fail(msg) { err.textContent = msg; err.hidden = false; }
+
+ form.addEventListener('submit', function (ev) {
+ ev.preventDefault();
+ err.hidden = true;
+ var prov = document.getElementById('agProv').value;
+ var d = parseInt(document.getElementById('agDay').value, 10);
+ var m = parseInt(document.getElementById('agMonth').value, 10);
+ var y = parseInt(document.getElementById('agYear').value, 10);
+ if (!prov) { return fail('Please select your province or territory.'); }
+ if (!d || !m || !y || y < 1900) { return fail('Please enter your full date of birth.'); }
+ var dob = new Date(y, m - 1, d);
+ if (dob.getDate() !== d || dob.getMonth() !== m - 1 || dob.getFullYear() !== y) {
+ return fail('That date does not look right. Please check and try again.');
+ }
+ var now = new Date();
+ var age = now.getFullYear() - y;
+ var before = (now.getMonth() < m - 1) || (now.getMonth() === m - 1 && now.getDate() < d);
+ if (before) { age--; }
+ var need = MIN[prov] || 19;
+ if (age < need) {
+ // A visitor who does not meet the age requirement goes nowhere.
+ return fail('You must be ' + need + ' or older to enter this site in that province.');
+ }
+ try { sessionStorage.setItem('sga_age_ok', '1'); } catch (e) {}
+ gate.hidden = true;
+ document.documentElement.classList.remove('ag-lock');
+ });
+})();
+</script>
+<div class="topbar">
+ <div class="wrap topbar-inner">
+ <a href="/sophias-garden-preview/contact/">Contact Us</a>
+ <a href="/sophias-garden-preview/blog/">Blog</a>
+ <a href="/sophias-garden-preview/servicing-areas/">Servicing Areas</a>
+ </div>
+</div>
+<header class="site-header">
+ <div class="wrap header-inner">
+ <a class="logo" href="/sophias-garden-preview/" aria-label="Sophia’s Garden Artisan — home">
+ <img class="brand-logo" src="/sophias-garden-preview/static/img/logo.png" alt="Sophia’s Garden Artisan">
+ </a>
+ <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false"></button>
+ <nav class="site-nav" id="siteNav" aria-label="Main">
+ <a href="/sophias-garden-preview/">Home</a>
+ <div class="nav-drop">
+ <a href="/sophias-garden-preview/products/">Our Products</a>
+ <ul class="drop-menu"><li><a href="/sophias-garden-preview/products/micro-zen/">Micro Zen</a></li><li><a href="/sophias-garden-preview/products/micro-zest/">Micro Zest</a></li></ul>
+ </div>
+ <div class="nav-drop">
+ <a href="/sophias-garden-preview/our-story/">Company</a>
+ <ul class="drop-menu"><li><a href="/sophias-garden-preview/chocolate-innovation-lab/">Chocolate Innovation Lab</a></li><li><a href="/sophias-garden-preview/cannabinoid-formulation-science/">Formulation Science</a></li><li><a href="/sophias-garden-preview/canadian-craft-manufacturing/">Craft Manufacturing</a></li><li><a href="/sophias-garden-preview/responsible-consumption/">Responsible Consumption</a></li></ul>
+ </div>
+ <a href="/sophias-garden-preview/education/" class="active">Education</a>
+ <a href="/sophias-garden-preview/where-to-buy/">Where to Buy</a>
+ <a href="/sophias-garden-preview/for-retailers/">For Retailers</a>
+ <a class="nav-login" href="/sophias-garden-preview/retailer-portal/">Retailer Login</a>
+ <a class="nav-login nav-login-alt" href="/sophias-garden-preview/investor-portal/">Investor Login</a>
+ </nav>
+ </div>
+</header>
+
+<section class="page-hero page-hero-lg">
+ <div class="wrap">
+ <p class="kicker">Education</p>
+ <h1>Cannabinoids, edibles and chocolate science</h1>
+ <p class="hero-sub">Straightforward information about cannabinoids, edible formats and how chocolate is used to carry a precise dose. Written for adults 19+ and for the retail professionals who answer questions about our products.</p>
+ </div>
+</section>
+
+<section class="section">
+ <div class="wrap">
+ <div class="figures figures-wide" data-reveal>
+ <div class="figure">
+ <p class="figure-n"><span data-count="3" data-suffix="">3</span></p>
+ <p class="figure-l">Cannabinoids covered</p>
+ </div>
+ <div class="figure">
+ <p class="figure-n"><span data-count="2" data-suffix="">2</span></p>
+ <p class="figure-l">Formats explained</p>
+ </div>
+ <div class="figure">
+ <p class="figure-n"><span data-count="4" data-suffix="">4</span></p>
+ <p class="figure-l">Topics in depth</p>
+ </div></div>
+ </div>
+</section>
+
+<section class="section-tight">
+ <div class="wrap narrow">
+ <nav class="edu-toc" aria-label="On this page"><a href="#theme-1">Cannabinoids explained</a><a href="#theme-2">How edibles work</a><a href="#theme-3">Differences between THC and CBD</a><a href="#theme-4">Chocolate formulation science</a></nav>
+ 
+ <article class="edu-theme" id="theme-1">
+ <p class="edu-num" data-reveal>01</p>
+ <h2 data-reveal>Cannabinoids explained</h2>
+ <p class="edu-lead" data-reveal>What cannabinoids are, and which ones appear in our products.</p>
+ <div data-reveal data-reveal-delay="60"><p>Cannabinoids are a family of compounds produced by the cannabis plant. More than a hundred have been identified. A small number are present in quantities large enough to be isolated and formulated with, and those are the ones the industry works with in practice.</p></div>
+ <div class="cann-grid" data-reveal>
+ <div class="cann-card" style="--c:#072733">
+ <span class="cann-mark">THC</span>
+ <p>In both products, at 1 mg per unit.</p>
+ </div>
+ <div class="cann-card" style="--c:#66B6AF">
+ <span class="cann-mark">CBD</span>
+ <p>Paired with THC in MICRO ZEN.</p>
+ </div>
+ <div class="cann-card" style="--c:#E6833C">
+ <span class="cann-mark">CBG</span>
+ <p>Paired with THC in MICRO ZEST.</p>
+ </div></div>
+ <div data-reveal><p>THC and CBD are the two most familiar. CBG is a third, present in much smaller amounts in most plant material, which is part of why it appears less often in finished products. Our two products use THC with CBD, and THC with CBG.</p><p>Cannabinoids are lipophilic, meaning they associate with fats rather than dissolving in water. That single property explains a great deal about how edible products are built, and it is why a fat-based medium like cocoa butter is a sensible carrier.</p></div>
+ </article>
+ <article class="edu-theme" id="theme-2">
+ <p class="edu-num" data-reveal>02</p>
+ <h2 data-reveal>How edibles work</h2>
+ <p class="edu-lead" data-reveal>The mechanical difference between an edible and an inhaled format.</p>
+ <div data-reveal data-reveal-delay="60"><p>An edible is processed differently from an inhaled product because it takes a different route through the body. Anything swallowed passes through the digestive system and the liver before it enters general circulation, which is not the case for something inhaled.</p><p>Two practical consequences follow. The first is timing: the digestive route takes substantially longer than inhalation, and how long depends on the individual and on what else they have eaten. The second is that the same declared amount of a cannabinoid behaves differently by format — an edible milligram and an inhaled milligram are not interchangeable units.</p></div>
+ <figure class="imgbreak imgbreak-tint" data-reveal="scale">
+ <img src="/sophias-garden-preview/static/img/products/micro-zen-chocolates.jpg" alt="The ten milk chocolate units in a pack of MICRO ZEN" loading="lazy">
+ <figcaption>Ten units to a pack. In a measured format the declared figure only means something if every unit matches the last one.</figcaption>
+ </figure>
+ <div data-reveal><p>This is the reason precision matters so much in an edible. Because the response is delayed and format-dependent, the declared figure on the package needs to be accurate and the units need to be consistent with each other. That is a manufacturing responsibility, and it is the problem our formats are built around.</p><p>Health Canada caps a package of edible cannabis at 10 mg of THC. Both of our products carry that full 10 mg — divided into ten separate units of 1 mg each. The regulation governs what a package may hold; the format decides how finely it is divided, and that division is the part we engineer.</p></div>
+ </article>
+ <article class="edu-theme" id="theme-3">
+ <p class="edu-num" data-reveal>03</p>
+ <h2 data-reveal>Differences between THC and CBD</h2>
+ <p class="edu-lead" data-reveal>Two cannabinoids, commonly named together and frequently confused.</p>
+ <div data-reveal data-reveal-delay="60"><p>THC and CBD are both cannabinoids and they are chemically similar, but they are not the same compound and they are not regulated identically. THC is the compound that products carrying the standardized cannabis symbol are labelled for, and its content must be declared on every package.</p><p>CBD is a separate cannabinoid, also declared on the label, and it is not the compound the symbol is concerned with. Products are frequently described by the ratio between the two — a balanced product carries them in equal measure, which is how MICRO ZEN is formulated at 1 mg of each.</p></div>
+ 
+ <div data-reveal><p>CBG is a third cannabinoid, chemically distinct again, and used in MICRO ZEST alongside THC in the same balanced 1 mg arrangement.</p><p>We describe what is in a product and in what quantity. What these compounds do in the body is a matter for researchers and for regulated health information — not something a licensed producer may characterise, and not something we will speculate about here.</p></div>
+ </article>
+ <article class="edu-theme" id="theme-4">
+ <p class="edu-num" data-reveal>04</p>
+ <h2 data-reveal>Chocolate formulation science</h2>
+ <p class="edu-lead" data-reveal>Why chocolate, and what makes a cannabinoid chocolate difficult to make well.</p>
+ <div data-reveal data-reveal-delay="60"><p>Chocolate is roughly a third cocoa butter, and cocoa butter is a fat with an unusually well-defined melting behaviour. That makes it both an excellent carrier for a lipophilic compound and a demanding medium to work in, because its crystal structure has to be controlled precisely.</p><p>Tempering is the controlled heating and cooling cycle that sets cocoa butter into the crystal form that gives chocolate its snap, its surface and its stability. Introducing a cannabinoid extract into that system affects how it behaves, so the formulation and the tempering have to be developed together rather than in sequence.</p></div>
+ <figure class="diagram" data-reveal="scale">
+ <svg viewBox="0 0 720 300" role="img" aria-label="Two panels comparing uneven distribution when extract is stirred into finished chocolate against even distribution when it is built into the cocoa butter first.">
+ <rect x="30" y="30" width="180" height="216" rx="10" fill="#072733" fill-opacity=".06" stroke="#072733" stroke-opacity=".16"/>
+ <rect x="510" y="30" width="180" height="216" rx="10" fill="#66B6AF" fill-opacity=".14" stroke="#66B6AF" stroke-opacity=".5"/>
+ <circle cx="74" cy="76" r="7" fill="#E6833C" fill-opacity=".9"/><circle cx="88" cy="88" r="7" fill="#E6833C" fill-opacity=".9"/><circle cx="82" cy="104" r="7" fill="#E6833C" fill-opacity=".9"/><circle cx="150" cy="74" r="7" fill="#E6833C" fill-opacity=".9"/><circle cx="162" cy="88" r="7" fill="#E6833C" fill-opacity=".9"/><circle cx="156" cy="106" r="7" fill="#E6833C" fill-opacity=".9"/><circle cx="90" cy="180" r="7" fill="#E6833C" fill-opacity=".9"/><circle cx="104" cy="192" r="7" fill="#E6833C" fill-opacity=".9"/><circle cx="96" cy="206" r="7" fill="#E6833C" fill-opacity=".9"/><circle cx="158" cy="180" r="7" fill="#E6833C" fill-opacity=".9"/>
+ <circle cx="548" cy="70" r="7" fill="#E6833C" fill-opacity=".9"/><circle cx="596" cy="92" r="7" fill="#E6833C" fill-opacity=".9"/><circle cx="644" cy="70" r="7" fill="#E6833C" fill-opacity=".9"/><circle cx="572" cy="122" r="7" fill="#E6833C" fill-opacity=".9"/><circle cx="620" cy="122" r="7" fill="#E6833C" fill-opacity=".9"/><circle cx="548" cy="154" r="7" fill="#E6833C" fill-opacity=".9"/><circle cx="596" cy="176" r="7" fill="#E6833C" fill-opacity=".9"/><circle cx="644" cy="154" r="7" fill="#E6833C" fill-opacity=".9"/><circle cx="572" cy="206" r="7" fill="#E6833C" fill-opacity=".9"/><circle cx="620" cy="206" r="7" fill="#E6833C" fill-opacity=".9"/>
+ <text x="120" y="272" class="dg-lb" text-anchor="middle">Stirred into finished chocolate</text>
+ <text x="600" y="272" class="dg-lb" text-anchor="middle">Built into the cocoa butter first</text>
+ <path d="M250 138 L470 138" stroke="#072733" stroke-opacity=".3" stroke-width="2" stroke-dasharray="6 7"/>
+ <path d="M462 130 L472 138 L462 146" fill="none" stroke="#072733" stroke-opacity=".5" stroke-width="2"/>
+ </svg>
+ <figcaption>The same quantity of cannabinoid, distributed two ways. Once chocolate sets, whatever distribution existed in the batch is locked into the individual units — which is why the extract is built into the fat phase before it becomes a confection.</figcaption>
+</figure>
+ <div data-reveal><p>The distribution problem is the central one. A batch has to be homogeneous before it is moulded, because once it sets, whatever variation exists is locked into individual units. Building the extract into the cocoa butter at the start is how that is addressed.</p><p>Flavour is the last constraint. Cannabis extract has a character of its own, and the usual way to cover it is sugar. Working with milk chocolate and with yuzu citrus is an attempt to balance it instead — a formulation decision rather than a masking one.</p></div>
+ </article>
+ <blockquote class="pullquote" data-reveal="scale">
+ <p>We describe what is in a product, in what quantity, and how it was verified. What it does is not ours to characterise.</p>
+ </blockquote>
+ <p class="edu-note">This page is general information about legal cannabis products in Canada. It is not advice, it makes no claims about effects, and it is intended only for adults of legal age.</p>
+ </div>
+</section>
+
+<section class="band band-buy">
+ <div class="wrap band-inner">
+ <div>
+ <h2>More from the lab</h2>
+ <p>Longer reads on formulation, extraction and how legal edibles are made in Canada.</p>
+ </div>
+ <a class="btn btn-solid" href="/sophias-garden-preview/blog/">Read the blog</a>
+ </div>
+</section>
+<footer class="site-footer">
+ <div class="wrap">
+ <div class="foot-warning">
+ <strong>Health warning</strong>
+ 
+ </div>
+ <div class="foot-grid">
+ <div class="foot-brand">
+ <img class="brand-mark" src="/sophias-garden-preview/static/img/logo-vertical-negative.png" alt="Sophia’s Garden Artisan">
+ <p class="foot-name">Sophia's Garden (Artisan) Inc.</p>
+ <p>600 Montreal St., Thunder Bay, ON P7E 6P8, Canada</p>
+ <p><a href="tel:+18558885877">+1 (855) 888-5877</a><br>
+ <a href="mailto:contact@sophiasartisan.com">contact@sophiasartisan.com</a></p>
+ <p>Licensed by Health Canada &middot; Federally licensed producer</p>
+ </div>
+ <div class="foot-col">
+ <h4>Explore</h4>
+ <a href="/sophias-garden-preview/products/">Our Products</a>
+ <a href="/sophias-garden-preview/our-story/">Company Story</a>
+ <a href="/sophias-garden-preview/chocolate-innovation-lab/">Chocolate Innovation Lab</a>
+ <a href="/sophias-garden-preview/cannabinoid-formulation-science/">Formulation Science</a>
+ <a href="/sophias-garden-preview/canadian-craft-manufacturing/">Craft Manufacturing</a>
+ <a href="/sophias-garden-preview/responsible-consumption/">Responsible Consumption</a>
+ <a href="/sophias-garden-preview/education/">Education</a>
+ <a href="/sophias-garden-preview/blog/">Blog</a>
+ <a href="/sophias-garden-preview/where-to-buy/">Where to Buy</a>
+ <a href="/sophias-garden-preview/servicing-areas/">Servicing Areas</a>
+ <a href="/sophias-garden-preview/for-retailers/">For Retailers</a>
+ <a href="/sophias-garden-preview/retailer-portal/">Retailer Login</a>
+ <a href="/sophias-garden-preview/investor-portal/">Investor Login</a>
+ <a href="/sophias-garden-preview/contact/">Contact</a>
+ </div>
+ <div class="foot-col">
+ <h4>Legal</h4>
+ <a href="/sophias-garden-preview/privacy/">Privacy Policy</a>
+ <a href="/sophias-garden-preview/terms/">Terms of Use</a>
+ <a href="/sophias-garden-preview/accessibility/">Accessibility</a>
+ 
+ </div>
+ </div>
+ <div class="foot-bottom">
+ <p>19+ &mdash; This site is intended for adults of legal age in Canada. Cannabis products are sold only through authorized retailers.</p>
+ <p>&copy; 2026 Sophia's Garden (Artisan) Inc. All rights reserved. Site by <a href="https://newlifemarketing.ca">Newlife Marketing</a>.</p>
+ </div>
+ </div>
+</footer>
+<script>
+(function () {
+ var t = document.getElementById('navToggle'), n = document.getElementById('siteNav');
+ t.addEventListener('click', function () {
+ var open = n.classList.toggle('open');
+ t.setAttribute('aria-expanded', open ? 'true' : 'false');
+ });
+})();
+</script>
+</body>
+</html>

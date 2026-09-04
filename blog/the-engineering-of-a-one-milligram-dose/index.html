@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The engineering behind a one-milligram dose — Sophia’s Garden Artisan</title>
+<meta name="description" content="Low-dose products are harder to manufacture than high-dose ones, not easier. Why precision gets more difficult as the number gets smaller, and what that demands of a production process.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="googlebot" content="noindex, nofollow">
+<meta property="og:title" content="The engineering behind a one-milligram dose — Sophia’s Garden Artisan">
+<meta property="og:description" content="Low-dose products are harder to manufacture than high-dose ones, not easier. Why precision gets more difficult as the number gets smaller, and what that demands of a production process.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="">
+<meta name="rating" content="adult">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/sophias-garden-preview/static/style.css?v=6b194b5e">
+<script src="/sophias-garden-preview/static/interactions.js?v=6b194b5e" defer></script>
+</head>
+<body>
+<div class="age-gate" id="ageGate" role="dialog" aria-modal="true" aria-labelledby="agTitle" hidden>
+ <div class="ag-card">
+ <div class="ag-mark"><img class="brand-mark" src="/sophias-garden-preview/static/img/logo-vertical-negative.png" alt="Sophia’s Garden Artisan"></div>
+ <h1 id="agTitle">Confirm your age to enter</h1>
+ <p class="ag-sub">This website contains information about cannabis products and is intended for adults of legal age in Canada.</p>
+ <form class="ag-form" id="agForm" novalidate>
+ <div class="ag-field">
+ <label for="agProv">Province or territory</label>
+ <select id="agProv" name="province" required>
+ <option value="" selected disabled>Select…</option>
+ <option value="AB">Alberta</option><option value="BC">British Columbia</option><option value="MB">Manitoba</option><option value="NB">New Brunswick</option><option value="NL">Newfoundland and Labrador</option><option value="NS">Nova Scotia</option><option value="NT">Northwest Territories</option><option value="NU">Nunavut</option><option value="ON">Ontario</option><option value="PE">Prince Edward Island</option><option value="QC">Quebec</option><option value="SK">Saskatchewan</option><option value="YT">Yukon</option>
+ </select>
+ </div>
+ <div class="ag-field">
+ <label for="agDob">Date of birth</label>
+ <div class="ag-dob">
+ <input type="text" id="agDay" inputmode="numeric" maxlength="2" placeholder="DD" aria-label="Day" required>
+ <input type="text" id="agMonth" inputmode="numeric" maxlength="2" placeholder="MM" aria-label="Month" required>
+ <input type="text" id="agYear" inputmode="numeric" maxlength="4" placeholder="YYYY" aria-label="Year" required>
+ </div>
+ </div>
+ <p class="ag-error" id="agError" role="alert" hidden></p>
+ <button class="btn btn-solid" type="submit" id="agSubmit">Enter site</button>
+ </form>
+ <p class="ag-fine">We ask only to confirm you are of legal age. Your date of birth is checked in your browser and is not stored or sent to us.</p>
+ </div>
+</div>
+<script>
+(function () {
+ var MIN = {"AB": 18, "BC": 19, "MB": 19, "NB": 19, "NL": 19, "NS": 19, "NT": 19, "NU": 19, "ON": 19, "PE": 19, "QC": 21, "SK": 19, "YT": 19};
+ var gate = document.getElementById('ageGate');
+ var form = document.getElementById('agForm');
+ var err = document.getElementById('agError');
+ // Session-only pass: the visitor is NOT remembered between visits, which
+ // is what lets SGA measure repeat access (Legend s.3).
+ function passed() {
+ try { return sessionStorage.getItem('sga_age_ok') === '1'; }
+ catch (e) { return false; }
+ }
+ if (passed()) return;
+ gate.hidden = false;
+ document.documentElement.classList.add('ag-lock');
+
+ function fail(msg) { err.textContent = msg; err.hidden = false; }
+
+ form.addEventListener('submit', function (ev) {
+ ev.preventDefault();
+ err.hidden = true;
+ var prov = document.getElementById('agProv').value;
+ var d = parseInt(document.getElementById('agDay').value, 10);
+ var m = parseInt(document.getElementById('agMonth').value, 10);
+ var y = parseInt(document.getElementById('agYear').value, 10);
+ if (!prov) { return fail('Please select your province or territory.'); }
+ if (!d || !m || !y || y < 1900) { return fail('Please enter your full date of birth.'); }
+ var dob = new Date(y, m - 1, d);
+ if (dob.getDate() !== d || dob.getMonth() !== m - 1 || dob.getFullYear() !== y) {
+ return fail('That date does not look right. Please check and try again.');
+ }
+ var now = new Date();
+ var age = now.getFullYear() - y;
+ var before = (now.getMonth() < m - 1) || (now.getMonth() === m - 1 && now.getDate() < d);
+ if (before) { age--; }
+ var need = MIN[prov] || 19;
+ if (age < need) {
+ // A visitor who does not meet the age requirement goes nowhere.
+ return fail('You must be ' + need + ' or older to enter this site in that province.');
+ }
+ try { sessionStorage.setItem('sga_age_ok', '1'); } catch (e) {}
+ gate.hidden = true;
+ document.documentElement.classList.remove('ag-lock');
+ });
+})();
+</script>
+<div class="topbar">
+ <div class="wrap topbar-inner">
+ <a href="/sophias-garden-preview/contact/">Contact Us</a>
+ <a href="/sophias-garden-preview/blog/">Blog</a>
+ <a href="/sophias-garden-preview/servicing-areas/">Servicing Areas</a>
+ </div>
+</div>
+<header class="site-header">
+ <div class="wrap header-inner">
+ <a class="logo" href="/sophias-garden-preview/" aria-label="Sophia’s Garden Artisan — home">
+ <img class="brand-logo" src="/sophias-garden-preview/static/img/logo.png" alt="Sophia’s Garden Artisan">
+ </a>
+ <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false"></button>
+ <nav class="site-nav" id="siteNav" aria-label="Main">
+ <a href="/sophias-garden-preview/">Home</a>
+ <div class="nav-drop">
+ <a href="/sophias-garden-preview/products/">Our Products</a>
+ <ul class="drop-menu"><li><a href="/sophias-garden-preview/products/micro-zen/">Micro Zen</a></li><li><a href="/sophias-garden-preview/products/micro-zest/">Micro Zest</a></li></ul>
+ </div>
+ <div class="nav-drop">
+ <a href="/sophias-garden-preview/our-story/">Company</a>
+ <ul class="drop-menu"><li><a href="/sophias-garden-preview/chocolate-innovation-lab/">Chocolate Innovation Lab</a></li><li><a href="/sophias-garden-preview/cannabinoid-formulation-science/">Formulation Science</a></li><li><a href="/sophias-garden-preview/canadian-craft-manufacturing/">Craft Manufacturing</a></li><li><a href="/sophias-garden-preview/responsible-consumption/">Responsible Consumption</a></li></ul>
+ </div>
+ <a href="/sophias-garden-preview/education/">Education</a>
+ <a href="/sophias-garden-preview/where-to-buy/">Where to Buy</a>
+ <a href="/sophias-garden-preview/for-retailers/">For Retailers</a>
+ <a class="nav-login" href="/sophias-garden-preview/retailer-portal/">Retailer Login</a>
+ <a class="nav-login nav-login-alt" href="/sophias-garden-preview/investor-portal/">Investor Login</a>
+ </nav>
+ </div>
+</header>
+
+<section class="page-hero">
+ <div class="wrap narrow">
+ <p class="kicker">Blog &middot; August 26, 2026</p>
+ <h1>The engineering behind a one-milligram dose</h1>
+ <p class="hero-sub">Low-dose products are harder to manufacture than high-dose ones, not easier. Why precision gets more difficult as the number gets smaller, and what that demands of a production process.</p>
+ </div>
+</section>
+
+<section class="section">
+ <div class="wrap narrow">
+ <div data-reveal="scale"><figure class="blog-img blog-cover">
+ <div class="blog-img-inner">
+ <img class="brand-mark" src="/sophias-garden-preview/static/img/logo-vertical-negative.png" alt="Sophia’s Garden Artisan">
+ <figcaption>[PHOTOGRAPHY: Analytical balance with a single chocolate unit being weighed]</figcaption>
+ </div>
+ </figure></div>
+ </div>
+</section>
+
+<div class="progress" data-progress aria-hidden="true"></div>
+
+<section class="section-tight" data-progress-target>
+ <div class="wrap narrow prose">
+ <p>There is a reasonable assumption that a 1 mg product is a simpler thing to make than a 10 mg one. Less active ingredient, less to go wrong. In manufacturing terms the opposite is true, and understanding why explains most of what our production process is built around.</p>
+ <h2>Proportional error</h2>
+ <p>Manufacturing tolerance is proportional, not absolute. If a process can place an active ingredient within a tenth of a milligram of its target, that is an excellent result — and on a 10 mg unit it represents a one percent variation, which is invisible. On a 1 mg unit, the same absolute error is ten percent.</p>
+ <p>So the smaller the declared dose, the tighter the process has to be to hit the same proportional accuracy. Choosing to build at 1 mg is choosing the harder version of the problem, deliberately.</p>
+ <figure class="blog-img">
+ <div class="blog-img-inner">
+ <img class="brand-mark" src="/sophias-garden-preview/static/img/logo-vertical-negative.png" alt="Sophia’s Garden Artisan">
+ <figcaption>[PHOTOGRAPHY: Moulding tray detail — uniform cavities, product setting]</figcaption>
+ </div>
+ </figure>
+ <h2>Homogeneity before moulding</h2>
+ <p>Everything depends on the batch being genuinely homogeneous before it is moulded. That means the cannabinoid must be evenly dispersed throughout the entire volume of tempered chocolate, not merely mixed in.</p>
+ <p>The distinction matters. A cannabinoid extract added to finished chocolate can appear mixed while remaining unevenly distributed at a smaller scale — and a moulding cavity is a small scale. Incorporating the extract into the cocoa butter phase gives the active ingredient a medium it genuinely disperses into rather than one it is merely suspended in.</p>
+ <h2>Unit consistency is the deliverable</h2>
+ <p>The number on a package describes a unit, and a unit is only meaningful if the next one matches it. Consistency between units is the actual product being sold — more so, arguably, than the chocolate itself. An adult choosing a measured format is choosing predictability, and predictability is a manufacturing outcome.</p>
+ <p>This is why moulding, portioning and setting are as controlled as the formulation. Uniform cavities, consistent fill, controlled cooling. Nothing exotic — just done to a tighter tolerance than confectionery normally requires.</p>
+ <h2>Verification, not assumption</h2>
+ <p>Process control gets you to a product you believe is right. Laboratory analysis is what confirms it. Every lot is tested by a laboratory licensed for the purpose, and the certificate of analysis for that lot is the record of what was actually produced rather than what was intended.</p>
+ <p>That is the loop: design for the tolerance, build the process to hold it, verify that it held. A formulation is not finished when it works once. It is finished when it can be reproduced and demonstrated.</p>
+ 
+ <p class="post-next">Next: <a href="/sophias-garden-preview/blog/cocoa-butter-cannabinoid-extracts/">Cocoa butter cannabinoid extracts, explained</a></p>
+ <p class="post-back"><a href="/sophias-garden-preview/blog/">&larr; All posts</a></p>
+ </div>
+</section>
+<footer class="site-footer">
+ <div class="wrap">
+ <div class="foot-warning">
+ <strong>Health warning</strong>
+ 
+ </div>
+ <div class="foot-grid">
+ <div class="foot-brand">
+ <img class="brand-mark" src="/sophias-garden-preview/static/img/logo-vertical-negative.png" alt="Sophia’s Garden Artisan">
+ <p class="foot-name">Sophia's Garden (Artisan) Inc.</p>
+ <p>600 Montreal St., Thunder Bay, ON P7E 6P8, Canada</p>
+ <p><a href="tel:+18558885877">+1 (855) 888-5877</a><br>
+ <a href="mailto:contact@sophiasartisan.com">contact@sophiasartisan.com</a></p>
+ <p>Licensed by Health Canada &middot; Federally licensed producer</p>
+ </div>
+ <div class="foot-col">
+ <h4>Explore</h4>
+ <a href="/sophias-garden-preview/products/">Our Products</a>
+ <a href="/sophias-garden-preview/our-story/">Company Story</a>
+ <a href="/sophias-garden-preview/chocolate-innovation-lab/">Chocolate Innovation Lab</a>
+ <a href="/sophias-garden-preview/cannabinoid-formulation-science/">Formulation Science</a>
+ <a href="/sophias-garden-preview/canadian-craft-manufacturing/">Craft Manufacturing</a>
+ <a href="/sophias-garden-preview/responsible-consumption/">Responsible Consumption</a>
+ <a href="/sophias-garden-preview/education/">Education</a>
+ <a href="/sophias-garden-preview/blog/">Blog</a>
+ <a href="/sophias-garden-preview/where-to-buy/">Where to Buy</a>
+ <a href="/sophias-garden-preview/servicing-areas/">Servicing Areas</a>
+ <a href="/sophias-garden-preview/for-retailers/">For Retailers</a>
+ <a href="/sophias-garden-preview/retailer-portal/">Retailer Login</a>
+ <a href="/sophias-garden-preview/investor-portal/">Investor Login</a>
+ <a href="/sophias-garden-preview/contact/">Contact</a>
+ </div>
+ <div class="foot-col">
+ <h4>Legal</h4>
+ <a href="/sophias-garden-preview/privacy/">Privacy Policy</a>
+ <a href="/sophias-garden-preview/terms/">Terms of Use</a>
+ <a href="/sophias-garden-preview/accessibility/">Accessibility</a>
+ 
+ </div>
+ </div>
+ <div class="foot-bottom">
+ <p>19+ &mdash; This site is intended for adults of legal age in Canada. Cannabis products are sold only through authorized retailers.</p>
+ <p>&copy; 2026 Sophia's Garden (Artisan) Inc. All rights reserved. Site by <a href="https://newlifemarketing.ca">Newlife Marketing</a>.</p>
+ </div>
+ </div>
+</footer>
+<script>
+(function () {
+ var t = document.getElementById('navToggle'), n = document.getElementById('siteNav');
+ t.addEventListener('click', function () {
+ var open = n.classList.toggle('open');
+ t.setAttribute('aria-expanded', open ? 'true' : 'false');
+ });
+})();
+</script>
+</body>
+</html>

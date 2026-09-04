@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Canadian craft manufacturing — Sophia’s Garden Artisan</title>
+<meta name="description" content="We manufacture in Northwestern Ontario, in a federally licensed facility, at a scale where the people making the product know how it is supposed to turn out.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="googlebot" content="noindex, nofollow">
+<meta property="og:title" content="Canadian craft manufacturing — Sophia’s Garden Artisan">
+<meta property="og:description" content="We manufacture in Northwestern Ontario, in a federally licensed facility, at a scale where the people making the product know how it is supposed to turn out.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="">
+<meta name="rating" content="adult">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/sophias-garden-preview/static/style.css?v=6b194b5e">
+<script src="/sophias-garden-preview/static/interactions.js?v=6b194b5e" defer></script>
+</head>
+<body>
+<div class="age-gate" id="ageGate" role="dialog" aria-modal="true" aria-labelledby="agTitle" hidden>
+ <div class="ag-card">
+ <div class="ag-mark"><img class="brand-mark" src="/sophias-garden-preview/static/img/logo-vertical-negative.png" alt="Sophia’s Garden Artisan"></div>
+ <h1 id="agTitle">Confirm your age to enter</h1>
+ <p class="ag-sub">This website contains information about cannabis products and is intended for adults of legal age in Canada.</p>
+ <form class="ag-form" id="agForm" novalidate>
+ <div class="ag-field">
+ <label for="agProv">Province or territory</label>
+ <select id="agProv" name="province" required>
+ <option value="" selected disabled>Select…</option>
+ <option value="AB">Alberta</option><option value="BC">British Columbia</option><option value="MB">Manitoba</option><option value="NB">New Brunswick</option><option value="NL">Newfoundland and Labrador</option><option value="NS">Nova Scotia</option><option value="NT">Northwest Territories</option><option value="NU">Nunavut</option><option value="ON">Ontario</option><option value="PE">Prince Edward Island</option><option value="QC">Quebec</option><option value="SK">Saskatchewan</option><option value="YT">Yukon</option>
+ </select>
+ </div>
+ <div class="ag-field">
+ <label for="agDob">Date of birth</label>
+ <div class="ag-dob">
+ <input type="text" id="agDay" inputmode="numeric" maxlength="2" placeholder="DD" aria-label="Day" required>
+ <input type="text" id="agMonth" inputmode="numeric" maxlength="2" placeholder="MM" aria-label="Month" required>
+ <input type="text" id="agYear" inputmode="numeric" maxlength="4" placeholder="YYYY" aria-label="Year" required>
+ </div>
+ </div>
+ <p class="ag-error" id="agError" role="alert" hidden></p>
+ <button class="btn btn-solid" type="submit" id="agSubmit">Enter site</button>
+ </form>
+ <p class="ag-fine">We ask only to confirm you are of legal age. Your date of birth is checked in your browser and is not stored or sent to us.</p>
+ </div>
+</div>
+<script>
+(function () {
+ var MIN = {"AB": 18, "BC": 19, "MB": 19, "NB": 19, "NL": 19, "NS": 19, "NT": 19, "NU": 19, "ON": 19, "PE": 19, "QC": 21, "SK": 19, "YT": 19};
+ var gate = document.getElementById('ageGate');
+ var form = document.getElementById('agForm');
+ var err = document.getElementById('agError');
+ // Session-only pass: the visitor is NOT remembered between visits, which
+ // is what lets SGA measure repeat access (Legend s.3).
+ function passed() {
+ try { return sessionStorage.getItem('sga_age_ok') === '1'; }
+ catch (e) { return false; }
+ }
+ if (passed()) return;
+ gate.hidden = false;
+ document.documentElement.classList.add('ag-lock');
+
+ function fail(msg) { err.textContent = msg; err.hidden = false; }
+
+ form.addEventListener('submit', function (ev) {
+ ev.preventDefault();
+ err.hidden = true;
+ var prov = document.getElementById('agProv').value;
+ var d = parseInt(document.getElementById('agDay').value, 10);
+ var m = parseInt(document.getElementById('agMonth').value, 10);
+ var y = parseInt(document.getElementById('agYear').value, 10);
+ if (!prov) { return fail('Please select your province or territory.'); }
+ if (!d || !m || !y || y < 1900) { return fail('Please enter your full date of birth.'); }
+ var dob = new Date(y, m - 1, d);
+ if (dob.getDate() !== d || dob.getMonth() !== m - 1 || dob.getFullYear() !== y) {
+ return fail('That date does not look right. Please check and try again.');
+ }
+ var now = new Date();
+ var age = now.getFullYear() - y;
+ var before = (now.getMonth() < m - 1) || (now.getMonth() === m - 1 && now.getDate() < d);
+ if (before) { age--; }
+ var need = MIN[prov] || 19;
+ if (age < need) {
+ // A visitor who does not meet the age requirement goes nowhere.
+ return fail('You must be ' + need + ' or older to enter this site in that province.');
+ }
+ try { sessionStorage.setItem('sga_age_ok', '1'); } catch (e) {}
+ gate.hidden = true;
+ document.documentElement.classList.remove('ag-lock');
+ });
+})();
+</script>
+<div class="topbar">
+ <div class="wrap topbar-inner">
+ <a href="/sophias-garden-preview/contact/">Contact Us</a>
+ <a href="/sophias-garden-preview/blog/">Blog</a>
+ <a href="/sophias-garden-preview/servicing-areas/">Servicing Areas</a>
+ </div>
+</div>
+<header class="site-header">
+ <div class="wrap header-inner">
+ <a class="logo" href="/sophias-garden-preview/" aria-label="Sophia’s Garden Artisan — home">
+ <img class="brand-logo" src="/sophias-garden-preview/static/img/logo.png" alt="Sophia’s Garden Artisan">
+ </a>
+ <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false"></button>
+ <nav class="site-nav" id="siteNav" aria-label="Main">
+ <a href="/sophias-garden-preview/">Home</a>
+ <div class="nav-drop">
+ <a href="/sophias-garden-preview/products/">Our Products</a>
+ <ul class="drop-menu"><li><a href="/sophias-garden-preview/products/micro-zen/">Micro Zen</a></li><li><a href="/sophias-garden-preview/products/micro-zest/">Micro Zest</a></li></ul>
+ </div>
+ <div class="nav-drop">
+ <a href="/sophias-garden-preview/our-story/" class="active">Company</a>
+ <ul class="drop-menu"><li><a href="/sophias-garden-preview/chocolate-innovation-lab/">Chocolate Innovation Lab</a></li><li><a href="/sophias-garden-preview/cannabinoid-formulation-science/">Formulation Science</a></li><li><a href="/sophias-garden-preview/canadian-craft-manufacturing/">Craft Manufacturing</a></li><li><a href="/sophias-garden-preview/responsible-consumption/">Responsible Consumption</a></li></ul>
+ </div>
+ <a href="/sophias-garden-preview/education/">Education</a>
+ <a href="/sophias-garden-preview/where-to-buy/">Where to Buy</a>
+ <a href="/sophias-garden-preview/for-retailers/">For Retailers</a>
+ <a class="nav-login" href="/sophias-garden-preview/retailer-portal/">Retailer Login</a>
+ <a class="nav-login nav-login-alt" href="/sophias-garden-preview/investor-portal/">Investor Login</a>
+ </nav>
+ </div>
+</header>
+
+<section class="page-hero page-hero-lg">
+ <div class="wrap">
+ <p class="kicker">Made in Thunder Bay</p>
+ <h1>Canadian craft manufacturing</h1>
+ <p class="hero-sub">We manufacture in Northwestern Ontario, in a federally licensed facility, at a scale where the people making the product know how it is supposed to turn out.</p>
+ </div>
+</section>
+
+<section class="section">
+ <div class="wrap"><div class="figures figures-wide" data-reveal>
+ <div class="figure">
+ <p class="figure-n"><span data-count="600" data-suffix="">600</span></p>
+ <p class="figure-l">Montreal St., Thunder Bay</p>
+ </div>
+ <div class="figure">
+ <p class="figure-n"><span data-count="2" data-suffix="">2</span></p>
+ <p class="figure-l">Products in production</p>
+ </div>
+ <div class="figure">
+ <p class="figure-n"><span data-count="72" data-suffix="">72</span></p>
+ <p class="figure-l">Packs to a case</p>
+ </div></div></div>
+</section>
+
+<section class="section-tight">
+ <div class="wrap editorial">
+ 
+ <div class="cs-block" data-reveal data-reveal-delay="0">
+ <h2>A Canadian manufacturer</h2>
+ <p>Sophia's Garden (Artisan) Inc. operates from 600 Montreal St. in Thunder Bay, Ontario, under licences issued by Health Canada. Manufacturing here rather than contracting it out is what keeps formulation and production in the same building. </p>
+ </div><h3 class="block-title" data-reveal>From formulation to released lot</h3><ol class="pflow">
+ <li class="pstep" data-reveal data-reveal-delay="0">
+ <span class="pstep-n">1</span>
+ <div>
+ <h4>Incoming material</h4>
+ <p>Cannabinoid inputs and food ingredients are received under the record-keeping the licence requires.</p>
+ </div>
+ </li>
+ <li class="pstep" data-reveal data-reveal-delay="90">
+ <span class="pstep-n">2</span>
+ <div>
+ <h4>Extract preparation</h4>
+ <p>The cannabinoid is built into the cocoa butter phase as a controlled step of its own.</p>
+ </div>
+ </li>
+ <li class="pstep" data-reveal data-reveal-delay="180">
+ <span class="pstep-n">3</span>
+ <div>
+ <h4>Tempering and moulding</h4>
+ <p>The batch is tempered and moulded into individual units under controlled temperature and humidity.</p>
+ </div>
+ </li>
+ <li class="pstep" data-reveal data-reveal-delay="270">
+ <span class="pstep-n">4</span>
+ <div>
+ <h4>Laboratory testing</h4>
+ <p>A sample from the lot goes to a licensed analytical laboratory.</p>
+ </div>
+ </li>
+ <li class="pstep" data-reveal data-reveal-delay="360">
+ <span class="pstep-n">5</span>
+ <div>
+ <h4>Quality assurance release</h4>
+ <p>A quality assurance person confirms the lot meets requirements. Product does not ship on commercial judgement alone.</p>
+ </div>
+ </li>
+ <li class="pstep" data-reveal data-reveal-delay="450">
+ <span class="pstep-n">6</span>
+ <div>
+ <h4>Packaging and distribution</h4>
+ <p>Packaged to the labelling rules, then into the provincial system.</p>
+ </div>
+ </li></ol>
+ <div class="cs-block" data-reveal data-reveal-delay="70">
+ <h2>Small batch, by choice</h2>
+ <p>We work in small batches. In edible manufacturing that means each production run is small enough to be checked closely and adjusted, rather than large enough that problems are discovered after the fact.</p>
+ </div><figure class="imgbreak imgbreak-tint" data-reveal="scale">
+ <img src="/sophias-garden-preview/static/img/products/micro-zest-pack.jpg" alt="MICRO ZEST balanced THC:CBG yuzu chocolate container" loading="lazy">
+ <figcaption>Packaged to the labelling rules — excise stamp, standardized cannabis symbol, health warning, lot number and licence holder all required.</figcaption>
+ </figure>
+ <div class="cs-block" data-reveal data-reveal-delay="140">
+ <h2>Confectionery discipline, plus cannabis regulation</h2>
+ <p>Chocolate manufacturing has its own standards — temperature control, humidity control, sanitation, and the handling practices any food producer is held to. Cannabis regulation is layered on top of that, not instead of it, and both apply at every step.</p>
+ </div><blockquote class="pullquote" data-reveal="scale">
+ <p>The people who develop the formulation are in the same building as the people who make it. That is most of what “craft” means here.</p>
+ </blockquote>
+ <div class="cs-block" data-reveal data-reveal-delay="0">
+ <h2>Why it stays here</h2>
+ <p>Northwestern Ontario is not the obvious place to build a cannabinoid chocolate lab. It is where the company is from, and keeping manufacturing local is a deliberate part of what the business is.</p>
+ </div>
+ </div>
+</section>
+
+<div class="marquee" aria-hidden="true">
+ <div class="marquee-track">
+ <span>Made in Thunder Bay</span><span>Thunder Bay, Ontario</span><span>Information first</span>
+ <span>Made in Thunder Bay</span><span>Thunder Bay, Ontario</span><span>Information first</span>
+ </div>
+</div>
+
+<section class="section section-tint">
+ <div class="wrap">
+ <p class="kicker" data-reveal>More on the company</p>
+ <h2 data-reveal>Related</h2>
+ <div class="sec-grid"><a class="sec-card" href="/sophias-garden-preview/chocolate-innovation-lab/" data-reveal data-reveal-delay="0"><h3>Chocolate Innovation Lab</h3><p>Where the formats are developed</p><span class="text-link">Read more &rarr;</span></a><a class="sec-card" href="/sophias-garden-preview/cannabinoid-formulation-science/" data-reveal data-reveal-delay="80"><h3>Formulation Science</h3><p>The science behind the format</p><span class="text-link">Read more &rarr;</span></a><a class="sec-card" href="/sophias-garden-preview/responsible-consumption/" data-reveal data-reveal-delay="160"><h3>Responsible Consumption</h3><p>Precision dose, by design</p><span class="text-link">Read more &rarr;</span></a></div>
+ </div>
+</section>
+<footer class="site-footer">
+ <div class="wrap">
+ <div class="foot-warning">
+ <strong>Health warning</strong>
+ 
+ </div>
+ <div class="foot-grid">
+ <div class="foot-brand">
+ <img class="brand-mark" src="/sophias-garden-preview/static/img/logo-vertical-negative.png" alt="Sophia’s Garden Artisan">
+ <p class="foot-name">Sophia's Garden (Artisan) Inc.</p>
+ <p>600 Montreal St., Thunder Bay, ON P7E 6P8, Canada</p>
+ <p><a href="tel:+18558885877">+1 (855) 888-5877</a><br>
+ <a href="mailto:contact@sophiasartisan.com">contact@sophiasartisan.com</a></p>
+ <p>Licensed by Health Canada &middot; Federally licensed producer</p>
+ </div>
+ <div class="foot-col">
+ <h4>Explore</h4>
+ <a href="/sophias-garden-preview/products/">Our Products</a>
+ <a href="/sophias-garden-preview/our-story/">Company Story</a>
+ <a href="/sophias-garden-preview/chocolate-innovation-lab/">Chocolate Innovation Lab</a>
+ <a href="/sophias-garden-preview/cannabinoid-formulation-science/">Formulation Science</a>
+ <a href="/sophias-garden-preview/canadian-craft-manufacturing/">Craft Manufacturing</a>
+ <a href="/sophias-garden-preview/responsible-consumption/">Responsible Consumption</a>
+ <a href="/sophias-garden-preview/education/">Education</a>
+ <a href="/sophias-garden-preview/blog/">Blog</a>
+ <a href="/sophias-garden-preview/where-to-buy/">Where to Buy</a>
+ <a href="/sophias-garden-preview/servicing-areas/">Servicing Areas</a>
+ <a href="/sophias-garden-preview/for-retailers/">For Retailers</a>
+ <a href="/sophias-garden-preview/retailer-portal/">Retailer Login</a>
+ <a href="/sophias-garden-preview/investor-portal/">Investor Login</a>
+ <a href="/sophias-garden-preview/contact/">Contact</a>
+ </div>
+ <div class="foot-col">
+ <h4>Legal</h4>
+ <a href="/sophias-garden-preview/privacy/">Privacy Policy</a>
+ <a href="/sophias-garden-preview/terms/">Terms of Use</a>
+ <a href="/sophias-garden-preview/accessibility/">Accessibility</a>
+ 
+ </div>
+ </div>
+ <div class="foot-bottom">
+ <p>19+ &mdash; This site is intended for adults of legal age in Canada. Cannabis products are sold only through authorized retailers.</p>
+ <p>&copy; 2026 Sophia's Garden (Artisan) Inc. All rights reserved. Site by <a href="https://newlifemarketing.ca">Newlife Marketing</a>.</p>
+ </div>
+ </div>
+</footer>
+<script>
+(function () {
+ var t = document.getElementById('navToggle'), n = document.getElementById('siteNav');
+ t.addEventListener('click', function () {
+ var open = n.classList.toggle('open');
+ t.setAttribute('aria-expanded', open ? 'true' : 'false');
+ });
+})();
+</script>
+</body>
+</html>

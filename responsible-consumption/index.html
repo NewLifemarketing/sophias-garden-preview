@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Responsible consumption philosophy — Sophia’s Garden Artisan</title>
+<meta name="description" content="Precision-dose cannabis formats designed for responsible consumption. This is a design philosophy, and it decides what we are willing to make.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="googlebot" content="noindex, nofollow">
+<meta property="og:title" content="Responsible consumption philosophy — Sophia’s Garden Artisan">
+<meta property="og:description" content="Precision-dose cannabis formats designed for responsible consumption. This is a design philosophy, and it decides what we are willing to make.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="">
+<meta name="rating" content="adult">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/sophias-garden-preview/static/style.css?v=6b194b5e">
+<script src="/sophias-garden-preview/static/interactions.js?v=6b194b5e" defer></script>
+</head>
+<body>
+<div class="age-gate" id="ageGate" role="dialog" aria-modal="true" aria-labelledby="agTitle" hidden>
+ <div class="ag-card">
+ <div class="ag-mark"><img class="brand-mark" src="/sophias-garden-preview/static/img/logo-vertical-negative.png" alt="Sophia’s Garden Artisan"></div>
+ <h1 id="agTitle">Confirm your age to enter</h1>
+ <p class="ag-sub">This website contains information about cannabis products and is intended for adults of legal age in Canada.</p>
+ <form class="ag-form" id="agForm" novalidate>
+ <div class="ag-field">
+ <label for="agProv">Province or territory</label>
+ <select id="agProv" name="province" required>
+ <option value="" selected disabled>Select…</option>
+ <option value="AB">Alberta</option><option value="BC">British Columbia</option><option value="MB">Manitoba</option><option value="NB">New Brunswick</option><option value="NL">Newfoundland and Labrador</option><option value="NS">Nova Scotia</option><option value="NT">Northwest Territories</option><option value="NU">Nunavut</option><option value="ON">Ontario</option><option value="PE">Prince Edward Island</option><option value="QC">Quebec</option><option value="SK">Saskatchewan</option><option value="YT">Yukon</option>
+ </select>
+ </div>
+ <div class="ag-field">
+ <label for="agDob">Date of birth</label>
+ <div class="ag-dob">
+ <input type="text" id="agDay" inputmode="numeric" maxlength="2" placeholder="DD" aria-label="Day" required>
+ <input type="text" id="agMonth" inputmode="numeric" maxlength="2" placeholder="MM" aria-label="Month" required>
+ <input type="text" id="agYear" inputmode="numeric" maxlength="4" placeholder="YYYY" aria-label="Year" required>
+ </div>
+ </div>
+ <p class="ag-error" id="agError" role="alert" hidden></p>
+ <button class="btn btn-solid" type="submit" id="agSubmit">Enter site</button>
+ </form>
+ <p class="ag-fine">We ask only to confirm you are of legal age. Your date of birth is checked in your browser and is not stored or sent to us.</p>
+ </div>
+</div>
+<script>
+(function () {
+ var MIN = {"AB": 18, "BC": 19, "MB": 19, "NB": 19, "NL": 19, "NS": 19, "NT": 19, "NU": 19, "ON": 19, "PE": 19, "QC": 21, "SK": 19, "YT": 19};
+ var gate = document.getElementById('ageGate');
+ var form = document.getElementById('agForm');
+ var err = document.getElementById('agError');
+ // Session-only pass: the visitor is NOT remembered between visits, which
+ // is what lets SGA measure repeat access (Legend s.3).
+ function passed() {
+ try { return sessionStorage.getItem('sga_age_ok') === '1'; }
+ catch (e) { return false; }
+ }
+ if (passed()) return;
+ gate.hidden = false;
+ document.documentElement.classList.add('ag-lock');
+
+ function fail(msg) { err.textContent = msg; err.hidden = false; }
+
+ form.addEventListener('submit', function (ev) {
+ ev.preventDefault();
+ err.hidden = true;
+ var prov = document.getElementById('agProv').value;
+ var d = parseInt(document.getElementById('agDay').value, 10);
+ var m = parseInt(document.getElementById('agMonth').value, 10);
+ var y = parseInt(document.getElementById('agYear').value, 10);
+ if (!prov) { return fail('Please select your province or territory.'); }
+ if (!d || !m || !y || y < 1900) { return fail('Please enter your full date of birth.'); }
+ var dob = new Date(y, m - 1, d);
+ if (dob.getDate() !== d || dob.getMonth() !== m - 1 || dob.getFullYear() !== y) {
+ return fail('That date does not look right. Please check and try again.');
+ }
+ var now = new Date();
+ var age = now.getFullYear() - y;
+ var before = (now.getMonth() < m - 1) || (now.getMonth() === m - 1 && now.getDate() < d);
+ if (before) { age--; }
+ var need = MIN[prov] || 19;
+ if (age < need) {
+ // A visitor who does not meet the age requirement goes nowhere.
+ return fail('You must be ' + need + ' or older to enter this site in that province.');
+ }
+ try { sessionStorage.setItem('sga_age_ok', '1'); } catch (e) {}
+ gate.hidden = true;
+ document.documentElement.classList.remove('ag-lock');
+ });
+})();
+</script>
+<div class="topbar">
+ <div class="wrap topbar-inner">
+ <a href="/sophias-garden-preview/contact/">Contact Us</a>
+ <a href="/sophias-garden-preview/blog/">Blog</a>
+ <a href="/sophias-garden-preview/servicing-areas/">Servicing Areas</a>
+ </div>
+</div>
+<header class="site-header">
+ <div class="wrap header-inner">
+ <a class="logo" href="/sophias-garden-preview/" aria-label="Sophia’s Garden Artisan — home">
+ <img class="brand-logo" src="/sophias-garden-preview/static/img/logo.png" alt="Sophia’s Garden Artisan">
+ </a>
+ <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false"></button>
+ <nav class="site-nav" id="siteNav" aria-label="Main">
+ <a href="/sophias-garden-preview/">Home</a>
+ <div class="nav-drop">
+ <a href="/sophias-garden-preview/products/">Our Products</a>
+ <ul class="drop-menu"><li><a href="/sophias-garden-preview/products/micro-zen/">Micro Zen</a></li><li><a href="/sophias-garden-preview/products/micro-zest/">Micro Zest</a></li></ul>
+ </div>
+ <div class="nav-drop">
+ <a href="/sophias-garden-preview/our-story/" class="active">Company</a>
+ <ul class="drop-menu"><li><a href="/sophias-garden-preview/chocolate-innovation-lab/">Chocolate Innovation Lab</a></li><li><a href="/sophias-garden-preview/cannabinoid-formulation-science/">Formulation Science</a></li><li><a href="/sophias-garden-preview/canadian-craft-manufacturing/">Craft Manufacturing</a></li><li><a href="/sophias-garden-preview/responsible-consumption/">Responsible Consumption</a></li></ul>
+ </div>
+ <a href="/sophias-garden-preview/education/">Education</a>
+ <a href="/sophias-garden-preview/where-to-buy/">Where to Buy</a>
+ <a href="/sophias-garden-preview/for-retailers/">For Retailers</a>
+ <a class="nav-login" href="/sophias-garden-preview/retailer-portal/">Retailer Login</a>
+ <a class="nav-login nav-login-alt" href="/sophias-garden-preview/investor-portal/">Investor Login</a>
+ </nav>
+ </div>
+</header>
+
+<section class="page-hero page-hero-lg">
+ <div class="wrap">
+ <p class="kicker">Precision dose, by design</p>
+ <h1>Responsible consumption philosophy</h1>
+ <p class="hero-sub">Precision-dose cannabis formats designed for responsible consumption. This is a design philosophy, and it decides what we are willing to make.</p>
+ </div>
+</section>
+
+<section class="section">
+ <div class="wrap"><div class="figures figures-wide" data-reveal>
+ <div class="figure">
+ <p class="figure-n"><span data-count="1" data-suffix=" mg">1 mg</span></p>
+ <p class="figure-l">Per unit, per cannabinoid</p>
+ </div>
+ <div class="figure">
+ <p class="figure-n"><span data-count="10" data-suffix=" mg">10 mg</span></p>
+ <p class="figure-l">Per package, the regulated cap</p>
+ </div>
+ <div class="figure">
+ <p class="figure-n"><span data-count="19" data-suffix="+">19+</span></p>
+ <p class="figure-l">Adults only, always</p>
+ </div></div></div>
+</section>
+
+<section class="section-tight">
+ <div class="wrap editorial">
+ 
+ <div class="cs-block" data-reveal data-reveal-delay="0">
+ <h2>Low dose is the product decision</h2>
+ <p>Both products are formulated at 1 mg of each cannabinoid per unit. That is a low dose by design. A measured, predictable unit gives an adult control over what they are doing, which is the entire point of a precision format.</p>
+ </div><figure class="diagram" data-reveal="scale">
+ <svg viewBox="0 0 720 230" role="img" aria-label="Ten units of one milligram each, together making the ten milligram package that regulation permits.">
+ <rect x="34" y="70" width="652" height="100" rx="14" fill="#072733" fill-opacity=".05" stroke="#072733" stroke-opacity=".16"/>
+ <g><circle cx="72" cy="120" r="24" fill="#84C28D" fill-opacity=".9"/><text x="72" y="126" class="dg-unit" text-anchor="middle">1</text></g><g><circle cx="134" cy="120" r="24" fill="#84C28D" fill-opacity=".9"/><text x="134" y="126" class="dg-unit" text-anchor="middle">1</text></g><g><circle cx="196" cy="120" r="24" fill="#84C28D" fill-opacity=".9"/><text x="196" y="126" class="dg-unit" text-anchor="middle">1</text></g><g><circle cx="258" cy="120" r="24" fill="#84C28D" fill-opacity=".9"/><text x="258" y="126" class="dg-unit" text-anchor="middle">1</text></g><g><circle cx="320" cy="120" r="24" fill="#84C28D" fill-opacity=".9"/><text x="320" y="126" class="dg-unit" text-anchor="middle">1</text></g><g><circle cx="382" cy="120" r="24" fill="#84C28D" fill-opacity=".9"/><text x="382" y="126" class="dg-unit" text-anchor="middle">1</text></g><g><circle cx="444" cy="120" r="24" fill="#84C28D" fill-opacity=".9"/><text x="444" y="126" class="dg-unit" text-anchor="middle">1</text></g><g><circle cx="506" cy="120" r="24" fill="#84C28D" fill-opacity=".9"/><text x="506" y="126" class="dg-unit" text-anchor="middle">1</text></g><g><circle cx="568" cy="120" r="24" fill="#84C28D" fill-opacity=".9"/><text x="568" y="126" class="dg-unit" text-anchor="middle">1</text></g><g><circle cx="630" cy="120" r="24" fill="#84C28D" fill-opacity=".9"/><text x="630" y="126" class="dg-unit" text-anchor="middle">1</text></g>
+ <text x="360" y="42" class="dg-lb" text-anchor="middle">One package &mdash; the 10 mg of THC a regulated edible package may contain</text>
+ <text x="360" y="202" class="dg-lb" text-anchor="middle">Ten units &times; 1 mg &mdash; the increment we engineer</text>
+ </svg>
+ <figcaption>Regulation decides what a package may hold. The format decides how finely that is divided, and a consistent 1 mg unit is the harder manufacturing problem.</figcaption>
+</figure>
+ <div class="cs-block" data-reveal data-reveal-delay="70">
+ <h2>What the regulation sets, and what we set</h2>
+ <p>Health Canada caps a package of edible cannabis at 10 mg of THC. Both of our products carry that full 10 mg, divided into ten units of 1 mg each. The regulation governs what a package may hold. The format decides how finely that is portioned — and a consistent 1 mg increment is the harder manufacturing problem, which is exactly why we chose it.</p>
+ </div>
+ <div class="cs-block" data-reveal data-reveal-delay="140">
+ <h2>Measured formats</h2>
+ <p>Each unit is individually moulded and portioned, and each pack contains ten of them. Consistency between units is what makes a dose meaningful: a declared figure is only useful if the next unit matches the last one.</p>
+ </div><blockquote class="pullquote" data-reveal="scale">
+ <p>Information first; promotion never. We describe what is in the product and how it was verified, and stop there.</p>
+ </blockquote>
+ <div class="cs-block" data-reveal data-reveal-delay="0">
+ <h2>Education, not encouragement</h2>
+ <p>Our public material explains how these formats are made and what the figures on a package mean. It does not encourage consumption, make claims about effects, or suggest occasions for use. That line is drawn deliberately and we do not go near it.</p>
+ </div>
+ <div class="cs-block" data-reveal data-reveal-delay="70">
+ <h2>For adults only</h2>
+ <p>This site is restricted to adults of legal age. Our products are sold only through authorized retailers, and nothing we produce is designed to appeal to anyone under the legal age.</p>
+ </div>
+ </div>
+</section>
+
+<div class="marquee" aria-hidden="true">
+ <div class="marquee-track">
+ <span>Precision dose, by design</span><span>Thunder Bay, Ontario</span><span>Information first</span>
+ <span>Precision dose, by design</span><span>Thunder Bay, Ontario</span><span>Information first</span>
+ </div>
+</div>
+
+<section class="section section-tint">
+ <div class="wrap">
+ <p class="kicker" data-reveal>More on the company</p>
+ <h2 data-reveal>Related</h2>
+ <div class="sec-grid"><a class="sec-card" href="/sophias-garden-preview/chocolate-innovation-lab/" data-reveal data-reveal-delay="0"><h3>Chocolate Innovation Lab</h3><p>Where the formats are developed</p><span class="text-link">Read more &rarr;</span></a><a class="sec-card" href="/sophias-garden-preview/cannabinoid-formulation-science/" data-reveal data-reveal-delay="80"><h3>Formulation Science</h3><p>The science behind the format</p><span class="text-link">Read more &rarr;</span></a><a class="sec-card" href="/sophias-garden-preview/canadian-craft-manufacturing/" data-reveal data-reveal-delay="160"><h3>Craft Manufacturing</h3><p>Made in Thunder Bay</p><span class="text-link">Read more &rarr;</span></a></div>
+ </div>
+</section>
+<footer class="site-footer">
+ <div class="wrap">
+ <div class="foot-warning">
+ <strong>Health warning</strong>
+ 
+ </div>
+ <div class="foot-grid">
+ <div class="foot-brand">
+ <img class="brand-mark" src="/sophias-garden-preview/static/img/logo-vertical-negative.png" alt="Sophia’s Garden Artisan">
+ <p class="foot-name">Sophia's Garden (Artisan) Inc.</p>
+ <p>600 Montreal St., Thunder Bay, ON P7E 6P8, Canada</p>
+ <p><a href="tel:+18558885877">+1 (855) 888-5877</a><br>
+ <a href="mailto:contact@sophiasartisan.com">contact@sophiasartisan.com</a></p>
+ <p>Licensed by Health Canada &middot; Federally licensed producer</p>
+ </div>
+ <div class="foot-col">
+ <h4>Explore</h4>
+ <a href="/sophias-garden-preview/products/">Our Products</a>
+ <a href="/sophias-garden-preview/our-story/">Company Story</a>
+ <a href="/sophias-garden-preview/chocolate-innovation-lab/">Chocolate Innovation Lab</a>
+ <a href="/sophias-garden-preview/cannabinoid-formulation-science/">Formulation Science</a>
+ <a href="/sophias-garden-preview/canadian-craft-manufacturing/">Craft Manufacturing</a>
+ <a href="/sophias-garden-preview/responsible-consumption/">Responsible Consumption</a>
+ <a href="/sophias-garden-preview/education/">Education</a>
+ <a href="/sophias-garden-preview/blog/">Blog</a>
+ <a href="/sophias-garden-preview/where-to-buy/">Where to Buy</a>
+ <a href="/sophias-garden-preview/servicing-areas/">Servicing Areas</a>
+ <a href="/sophias-garden-preview/for-retailers/">For Retailers</a>
+ <a href="/sophias-garden-preview/retailer-portal/">Retailer Login</a>
+ <a href="/sophias-garden-preview/investor-portal/">Investor Login</a>
+ <a href="/sophias-garden-preview/contact/">Contact</a>
+ </div>
+ <div class="foot-col">
+ <h4>Legal</h4>
+ <a href="/sophias-garden-preview/privacy/">Privacy Policy</a>
+ <a href="/sophias-garden-preview/terms/">Terms of Use</a>
+ <a href="/sophias-garden-preview/accessibility/">Accessibility</a>
+ 
+ </div>
+ </div>
+ <div class="foot-bottom">
+ <p>19+ &mdash; This site is intended for adults of legal age in Canada. Cannabis products are sold only through authorized retailers.</p>
+ <p>&copy; 2026 Sophia's Garden (Artisan) Inc. All rights reserved. Site by <a href="https://newlifemarketing.ca">Newlife Marketing</a>.</p>
+ </div>
+ </div>
+</footer>
+<script>
+(function () {
+ var t = document.getElementById('navToggle'), n = document.getElementById('siteNav');
+ t.addEventListener('click', function () {
+ var open = n.classList.toggle('open');
+ t.setAttribute('aria-expanded', open ? 'true' : 'false');
+ });
+})();
+</script>
+</body>
+</html>

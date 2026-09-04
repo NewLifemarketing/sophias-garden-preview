@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>For Retailers — Sophia’s Garden Artisan</title>
+<meta name="description" content="Point-of-sale materials, budtender education and product documentation for authorized cannabis retailers. 19+.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="googlebot" content="noindex, nofollow">
+<meta property="og:title" content="For Retailers — Sophia’s Garden Artisan">
+<meta property="og:description" content="Point-of-sale materials, budtender education and product documentation for authorized cannabis retailers. 19+.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="">
+<meta name="rating" content="adult">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/sophias-garden-preview/static/style.css?v=6b194b5e">
+<script src="/sophias-garden-preview/static/interactions.js?v=6b194b5e" defer></script>
+</head>
+<body>
+<div class="age-gate" id="ageGate" role="dialog" aria-modal="true" aria-labelledby="agTitle" hidden>
+ <div class="ag-card">
+ <div class="ag-mark"><img class="brand-mark" src="/sophias-garden-preview/static/img/logo-vertical-negative.png" alt="Sophia’s Garden Artisan"></div>
+ <h1 id="agTitle">Confirm your age to enter</h1>
+ <p class="ag-sub">This website contains information about cannabis products and is intended for adults of legal age in Canada.</p>
+ <form class="ag-form" id="agForm" novalidate>
+ <div class="ag-field">
+ <label for="agProv">Province or territory</label>
+ <select id="agProv" name="province" required>
+ <option value="" selected disabled>Select…</option>
+ <option value="AB">Alberta</option><option value="BC">British Columbia</option><option value="MB">Manitoba</option><option value="NB">New Brunswick</option><option value="NL">Newfoundland and Labrador</option><option value="NS">Nova Scotia</option><option value="NT">Northwest Territories</option><option value="NU">Nunavut</option><option value="ON">Ontario</option><option value="PE">Prince Edward Island</option><option value="QC">Quebec</option><option value="SK">Saskatchewan</option><option value="YT">Yukon</option>
+ </select>
+ </div>
+ <div class="ag-field">
+ <label for="agDob">Date of birth</label>
+ <div class="ag-dob">
+ <input type="text" id="agDay" inputmode="numeric" maxlength="2" placeholder="DD" aria-label="Day" required>
+ <input type="text" id="agMonth" inputmode="numeric" maxlength="2" placeholder="MM" aria-label="Month" required>
+ <input type="text" id="agYear" inputmode="numeric" maxlength="4" placeholder="YYYY" aria-label="Year" required>
+ </div>
+ </div>
+ <p class="ag-error" id="agError" role="alert" hidden></p>
+ <button class="btn btn-solid" type="submit" id="agSubmit">Enter site</button>
+ </form>
+ <p class="ag-fine">We ask only to confirm you are of legal age. Your date of birth is checked in your browser and is not stored or sent to us.</p>
+ </div>
+</div>
+<script>
+(function () {
+ var MIN = {"AB": 18, "BC": 19, "MB": 19, "NB": 19, "NL": 19, "NS": 19, "NT": 19, "NU": 19, "ON": 19, "PE": 19, "QC": 21, "SK": 19, "YT": 19};
+ var gate = document.getElementById('ageGate');
+ var form = document.getElementById('agForm');
+ var err = document.getElementById('agError');
+ // Session-only pass: the visitor is NOT remembered between visits, which
+ // is what lets SGA measure repeat access (Legend s.3).
+ function passed() {
+ try { return sessionStorage.getItem('sga_age_ok') === '1'; }
+ catch (e) { return false; }
+ }
+ if (passed()) return;
+ gate.hidden = false;
+ document.documentElement.classList.add('ag-lock');
+
+ function fail(msg) { err.textContent = msg; err.hidden = false; }
+
+ form.addEventListener('submit', function (ev) {
+ ev.preventDefault();
+ err.hidden = true;
+ var prov = document.getElementById('agProv').value;
+ var d = parseInt(document.getElementById('agDay').value, 10);
+ var m = parseInt(document.getElementById('agMonth').value, 10);
+ var y = parseInt(document.getElementById('agYear').value, 10);
+ if (!prov) { return fail('Please select your province or territory.'); }
+ if (!d || !m || !y || y < 1900) { return fail('Please enter your full date of birth.'); }
+ var dob = new Date(y, m - 1, d);
+ if (dob.getDate() !== d || dob.getMonth() !== m - 1 || dob.getFullYear() !== y) {
+ return fail('That date does not look right. Please check and try again.');
+ }
+ var now = new Date();
+ var age = now.getFullYear() - y;
+ var before = (now.getMonth() < m - 1) || (now.getMonth() === m - 1 && now.getDate() < d);
+ if (before) { age--; }
+ var need = MIN[prov] || 19;
+ if (age < need) {
+ // A visitor who does not meet the age requirement goes nowhere.
+ return fail('You must be ' + need + ' or older to enter this site in that province.');
+ }
+ try { sessionStorage.setItem('sga_age_ok', '1'); } catch (e) {}
+ gate.hidden = true;
+ document.documentElement.classList.remove('ag-lock');
+ });
+})();
+</script>
+<div class="topbar">
+ <div class="wrap topbar-inner">
+ <a href="/sophias-garden-preview/contact/">Contact Us</a>
+ <a href="/sophias-garden-preview/blog/">Blog</a>
+ <a href="/sophias-garden-preview/servicing-areas/">Servicing Areas</a>
+ </div>
+</div>
+<header class="site-header">
+ <div class="wrap header-inner">
+ <a class="logo" href="/sophias-garden-preview/" aria-label="Sophia’s Garden Artisan — home">
+ <img class="brand-logo" src="/sophias-garden-preview/static/img/logo.png" alt="Sophia’s Garden Artisan">
+ </a>
+ <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false"></button>
+ <nav class="site-nav" id="siteNav" aria-label="Main">
+ <a href="/sophias-garden-preview/">Home</a>
+ <div class="nav-drop">
+ <a href="/sophias-garden-preview/products/">Our Products</a>
+ <ul class="drop-menu"><li><a href="/sophias-garden-preview/products/micro-zen/">Micro Zen</a></li><li><a href="/sophias-garden-preview/products/micro-zest/">Micro Zest</a></li></ul>
+ </div>
+ <div class="nav-drop">
+ <a href="/sophias-garden-preview/our-story/">Company</a>
+ <ul class="drop-menu"><li><a href="/sophias-garden-preview/chocolate-innovation-lab/">Chocolate Innovation Lab</a></li><li><a href="/sophias-garden-preview/cannabinoid-formulation-science/">Formulation Science</a></li><li><a href="/sophias-garden-preview/canadian-craft-manufacturing/">Craft Manufacturing</a></li><li><a href="/sophias-garden-preview/responsible-consumption/">Responsible Consumption</a></li></ul>
+ </div>
+ <a href="/sophias-garden-preview/education/">Education</a>
+ <a href="/sophias-garden-preview/where-to-buy/">Where to Buy</a>
+ <a href="/sophias-garden-preview/for-retailers/" class="active">For Retailers</a>
+ <a class="nav-login" href="/sophias-garden-preview/retailer-portal/">Retailer Login</a>
+ <a class="nav-login nav-login-alt" href="/sophias-garden-preview/investor-portal/">Investor Login</a>
+ </nav>
+ </div>
+</header>
+
+<section class="page-hero">
+ <div class="wrap">
+ <p class="kicker">For retailers</p>
+ <h1>Craft chocolate + cannabinoid precision</h1>
+ <p class="hero-sub">Two precision-dose formats, a manufacturing story your staff can tell, and a full education kit behind a free retail login.</p>
+ </div>
+</section>
+
+<section class="section">
+ <div class="wrap">
+ <p class="kicker">Why stock us</p>
+ <h2>The case for the shelf</h2>
+ <div class="diff-grid">
+ <div class="diff-item">
+ <h3>A category story staff can tell</h3>
+ <p>Craft chocolate plus cannabinoid precision. Two SKUs, a clear difference between them, and a manufacturing story that gives your staff something concrete to say.</p>
+ </div>
+ <div class="diff-item">
+ <h3>Low-dose formats</h3>
+ <p>1 mg per unit, ten units per pack. Precision-dose formats designed for responsible consumption — a straightforward recommendation for a customer who wants control.</p>
+ </div>
+ <div class="diff-item">
+ <h3>Licensed and compliant</h3>
+ <p>Federally licensed by Health Canada. All packaging and marketing follow Cannabis Act requirements, and every lot is laboratory tested.</p>
+ </div></div>
+ </div>
+</section>
+
+<section class="section section-tint">
+ <div class="wrap">
+ <div class="stat-band" data-reveal="scale">
+ <p class="stat-figure"><span data-count="40">40</span>&ndash;<span data-count="70" data-suffix="%">70%</span></p>
+ <p class="stat-note">of purchasing decisions in Canada are influenced by budtenders, which makes retail staff the most important audience we have.</p>
+ </div>
+ <p class="kicker">Budtender education programme</p>
+ <h2>Because budtenders are the #1 sales driver in Canada</h2>
+ <div class="split-lists">
+ <div>
+ <h3>What the programme includes</h3>
+ <ul class="tick"><li>Product knowledge guides</li><li>Cannabinoid education cards</li><li>Chocolate production story</li><li>Extract formulation training</li><li>Budtender cheat sheets and comparison charts</li></ul>
+ </div>
+ <div>
+ <h3>How it is delivered</h3>
+ <ul class="tick"><li>Private budtender portal</li><li>Retail training events</li><li>Virtual seminars</li></ul>
+ </div>
+ </div>
+ <p class="rule-note">Ontario rule: education only — no financial incentives of any kind.</p>
+ </div>
+</section>
+
+<section class="section" id="portal">
+ <div class="wrap">
+ <p class="kicker">Retail portal</p>
+ <h2>Two account types, one login</h2>
+ <p class="section-sub">Product information on this site is open to every adult visitor. The <strong>downloadable materials</strong> sit behind a free retail login, because they are written for the trade.</p>
+ <div class="tier-grid">
+ <div class="tier" data-reveal data-reveal-delay="0">
+ <h3>Retailers</h3>
+ <p>Store-level accounts. Point-of-sale materials, product comparison charts, education-focused shelf talkers and the current product documentation.</p>
+ </div>
+ <div class="tier" data-reveal data-reveal-delay="90">
+ <h3>Budtenders</h3>
+ <p>Staff accounts. Product knowledge guides, cannabinoid education cards, the chocolate production story, extract formulation training and cheat sheets for the counter.</p>
+ </div></div>
+ <div class="diff-grid">
+ <div class="diff-item">
+ <h3>Retailer POS materials</h3>
+ <p>Education-focused shelf talkers, product comparison charts and point-of-sale support, ready to download.</p>
+ </div>
+ <div class="diff-item">
+ <h3>Budtender education kit</h3>
+ <p>Product knowledge guides, cannabinoid education cards and counter cheat sheets for staff.</p>
+ </div>
+ <div class="diff-item">
+ <h3>Product documentation</h3>
+ <p>Spec sheets and certificates of analysis for the current lots. </p>
+ </div>
+ <div class="diff-item">
+ <h3>Brand assets</h3>
+ <p>Approved logo files and brand material for your listings and in-store use.</p>
+ </div></div>
+ <ol class="portal-steps">
+ <li><strong>Register with your work email</strong> &mdash; accounts on a business domain are approved automatically.</li>
+ <li><strong>We confirm the account</strong> &mdash; anything on a personal domain is reviewed by us before access is granted.</li>
+ <li><strong>Download anytime</strong> &mdash; POS materials, education kits, spec sheets and certificates of analysis, always current.</li>
+ </ol>
+ <div class="portal-login"><span class="btn btn-ph" aria-disabled="true">Retailer log in &mdash; portal launching</span>
+ <div class="portal-needs"></div></div>
+ </div>
+</section>
+
+<section class="section section-tint">
+ <div class="wrap narrow">
+ <p class="kicker">Ordering</p>
+ <h2>How to order</h2>
+ <p>Our products are distributed through the provincial system, as the regulations require. Ontario retailers order through the OCS catalogue. This site generates enquiries only — it does not take orders, and pricing is set by the provincial distributors.</p>
+ </div>
+</section>
+
+<section class="section" id="enquiry">
+ <div class="wrap narrow">
+ <p class="kicker">Register</p>
+ <h2>Create a retail account</h2>
+ <p>Tell us about your store and we will set up your access. Retailers register with a company email address. Accounts on a business domain are approved automatically; anything else is reviewed by us. Investor accounts are created by Sophia’s Garden Artisan and are not available by request.</p>
+ <div class="form-shell">
+ <p class="form-shell-note">Fields: contact name, work email on a business domain, role, store/business name, number of stores, city/province, phone.</p>
+ <span class="btn btn-solid" aria-disabled="true">Submit</span>
+ </div>
+ <p class="aside-link">Prefer email? Retail and wholesale enquiries go to <a href="mailto:sales@sophiasartisan.com">sales@sophiasartisan.com</a>.</p>
+ </div>
+</section>
+<footer class="site-footer">
+ <div class="wrap">
+ <div class="foot-warning">
+ <strong>Health warning</strong>
+ 
+ </div>
+ <div class="foot-grid">
+ <div class="foot-brand">
+ <img class="brand-mark" src="/sophias-garden-preview/static/img/logo-vertical-negative.png" alt="Sophia’s Garden Artisan">
+ <p class="foot-name">Sophia's Garden (Artisan) Inc.</p>
+ <p>600 Montreal St., Thunder Bay, ON P7E 6P8, Canada</p>
+ <p><a href="tel:+18558885877">+1 (855) 888-5877</a><br>
+ <a href="mailto:contact@sophiasartisan.com">contact@sophiasartisan.com</a></p>
+ <p>Licensed by Health Canada &middot; Federally licensed producer</p>
+ </div>
+ <div class="foot-col">
+ <h4>Explore</h4>
+ <a href="/sophias-garden-preview/products/">Our Products</a>
+ <a href="/sophias-garden-preview/our-story/">Company Story</a>
+ <a href="/sophias-garden-preview/chocolate-innovation-lab/">Chocolate Innovation Lab</a>
+ <a href="/sophias-garden-preview/cannabinoid-formulation-science/">Formulation Science</a>
+ <a href="/sophias-garden-preview/canadian-craft-manufacturing/">Craft Manufacturing</a>
+ <a href="/sophias-garden-preview/responsible-consumption/">Responsible Consumption</a>
+ <a href="/sophias-garden-preview/education/">Education</a>
+ <a href="/sophias-garden-preview/blog/">Blog</a>
+ <a href="/sophias-garden-preview/where-to-buy/">Where to Buy</a>
+ <a href="/sophias-garden-preview/servicing-areas/">Servicing Areas</a>
+ <a href="/sophias-garden-preview/for-retailers/">For Retailers</a>
+ <a href="/sophias-garden-preview/retailer-portal/">Retailer Login</a>
+ <a href="/sophias-garden-preview/investor-portal/">Investor Login</a>
+ <a href="/sophias-garden-preview/contact/">Contact</a>
+ </div>
+ <div class="foot-col">
+ <h4>Legal</h4>
+ <a href="/sophias-garden-preview/privacy/">Privacy Policy</a>
+ <a href="/sophias-garden-preview/terms/">Terms of Use</a>
+ <a href="/sophias-garden-preview/accessibility/">Accessibility</a>
+ 
+ </div>
+ </div>
+ <div class="foot-bottom">
+ <p>19+ &mdash; This site is intended for adults of legal age in Canada. Cannabis products are sold only through authorized retailers.</p>
+ <p>&copy; 2026 Sophia's Garden (Artisan) Inc. All rights reserved. Site by <a href="https://newlifemarketing.ca">Newlife Marketing</a>.</p>
+ </div>
+ </div>
+</footer>
+<script>
+(function () {
+ var t = document.getElementById('navToggle'), n = document.getElementById('siteNav');
+ t.addEventListener('click', function () {
+ var open = n.classList.toggle('open');
+ t.setAttribute('aria-expanded', open ? 'true' : 'false');
+ });
+})();
+</script>
+</body>
+</html>
