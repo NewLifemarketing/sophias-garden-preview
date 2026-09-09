@@ -258,12 +258,12 @@ a { color: var(--navy); }
 }
 
 /* ---------------------------------------------------------- portal ----- */
-.nav-login {
-  border: 1.5px solid var(--teal); color: var(--teal);
-  border-radius: 999px; padding: 8px 18px; font-weight: 600;
-  margin-left: 8px; white-space: nowrap;
+.site-nav > a.nav-login, .nav-login {
+  color: var(--teal); font-weight: 600; white-space: nowrap;
+  margin-left: 8px; padding: 6px 0;
+  border-bottom: 2px solid transparent;
 }
-.nav-login:hover { background: var(--teal); color: #fff; }
+.nav-login:hover { border-bottom-color: var(--teal); }
 .portal-steps { margin: 34px 0 30px; padding: 0; counter-reset: pstep; list-style: none; max-width: 720px; }
 .portal-steps li {
   counter-increment: pstep; position: relative;
@@ -284,8 +284,6 @@ a { color: var(--navy); }
 @media (max-width: 900px) { .nav-login { margin-left: 0; align-self: flex-start; } }
 
 /* ------------------------------------------- education / blog / login -- */
-.nav-login-alt { border-color: var(--ink); color: var(--ink); }
-.nav-login-alt:hover { background: var(--ink); color: var(--mist); }
 
 .edu-grid, .post-grid {
   display: grid; gap: 24px;
@@ -337,7 +335,6 @@ a { color: var(--navy); }
 @media (min-width: 901px) and (max-width: 1200px) {
   .site-nav { gap: 16px; }
   .site-nav > a { font-size: .86rem; }
-  .nav-login { padding: 7px 13px; }
   .logo-sub { display: none; }
 }
 
