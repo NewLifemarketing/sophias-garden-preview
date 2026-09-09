@@ -195,51 +195,79 @@
   }
 
 
-  /* ---------- 6. portal gate (DEMONSTRATION ONLY) ------------------- */
-  /* This is a walkthrough, not access control. The expected code is in the
-     page source and the document markup is served to every visitor. It
-     exists so the flow can be shown end to end. Real accounts and real
-     documents require server-side authentication — see PORTAL_DEMO in
-     data.py and PORTALS-DEMO.md. */
+  /* ---------- 6. login gate (DEMONSTRATION ONLY) -------------------- */
+  /* One login for everyone. Each document panel carries its own access
+     code; the code entered decides which panel opens. This is a
+     walkthrough, not access control — the codes are in the page source and
+     every panel's markup is served to all visitors. Real accounts and real
+     documents require server-side authentication. */
   function portalGate() {
     var portal = document.querySelector('[data-portal]');
     if (!portal) return;
     var gate = portal.querySelector('[data-gate]');
-    var inner = portal.querySelector('[data-portal-inner]');
+    var panels = Array.prototype.slice.call(
+      portal.querySelectorAll('[data-portal-inner]'));
     var form = portal.querySelector('[data-gate-form]');
     var err = portal.querySelector('[data-gate-error]');
-    var out = portal.querySelector('[data-signout]');
-    var expected = (portal.getAttribute('data-code') || '').toUpperCase();
+    if (!gate || !form || !panels.length) return;
     var key = 'sga_portal_' + location.pathname;
 
-    function open_() {
+    function panelFor(code) {
+      for (var i = 0; i < panels.length; i++) {
+        var expected = (panels[i].getAttribute('data-portal-code') || '')
+                         .trim().toUpperCase();
+        if (expected && expected === code) return panels[i];
+      }
+      return null;
+    }
+
+    function open_(panel) {
       gate.hidden = true;
-      inner.hidden = false;
-      try { sessionStorage.setItem(key, '1'); } catch (e) {}
+      panels.forEach(function (p) { p.hidden = (p !== panel); });
+      try { sessionStorage.setItem(key, panel.getAttribute('data-portal-code')); }
+      catch (e) {}
       window.scrollTo(0, 0);
     }
+
     function close_() {
-      inner.hidden = true;
+      panels.forEach(function (p) { p.hidden = true; });
       gate.hidden = false;
       try { sessionStorage.removeItem(key); } catch (e) {}
       var f = form.querySelector('input');
       if (f) f.value = '';
+      window.scrollTo(0, 0);
     }
-    try { if (sessionStorage.getItem(key) === '1') open_(); } catch (e) {}
+
+    // restore an unlocked panel for this session
+    try {
+      var saved = sessionStorage.getItem(key);
+      if (saved) {
+        var p = panelFor(saved.trim().toUpperCase());
+        if (p) open_(p);
+      }
+    } catch (e) {}
 
     form.addEventListener('submit', function (ev) {
       ev.preventDefault();
       var v = (form.querySelector('input').value || '').trim().toUpperCase();
-      if (!v) { err.textContent = 'Enter your access code.'; err.hidden = false; return; }
-      if (v !== expected) {
+      if (!v) {
+        err.textContent = 'Enter your access code.';
+        err.hidden = false;
+        return;
+      }
+      var panel = panelFor(v);
+      if (!panel) {
         err.textContent = 'That code was not recognised. Check it and try again.';
         err.hidden = false;
         return;
       }
       err.hidden = true;
-      open_();
+      open_(panel);
     });
-    if (out) out.addEventListener('click', close_);
+
+    portal.querySelectorAll('[data-signout]').forEach(function (b) {
+      b.addEventListener('click', close_);
+    });
   }
 
   function init() { reveals(); viewer(); counters(); stickyBar(); progress(); portalGate(); }
