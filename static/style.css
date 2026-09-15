@@ -1229,3 +1229,19 @@ ul.tick li::before {
   font-size: .82rem; color: var(--ink-soft); margin-top: .5em;
   letter-spacing: .04em;
 }
+
+/* The round-2 one- and two-tile rules above set a hard 190px track floor,
+   which needs ~398px for two columns — wider than a 390px phone, so both
+   the Xtract and Co-Manufacturing pages scrolled sideways. The :has()
+   selectors have to be repeated here to outrank themselves. */
+@media (max-width: 700px) {
+  .figures,
+  .figures-wide,
+  .figures:has(.figure:only-child),
+  .figures-wide:has(.figure:only-child),
+  .figures:has(.figure:nth-child(2):last-child),
+  .figures-wide:has(.figure:nth-child(2):last-child) {
+    grid-template-columns: 1fr;
+    max-width: none;
+  }
+}

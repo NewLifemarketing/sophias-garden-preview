@@ -7,6 +7,9 @@
 <meta name="description" content="Account access for Sophia's Garden (Artisan) Inc. — retailers, budtenders and investors.">
 <meta name="robots" content="noindex, nofollow">
 <meta name="googlebot" content="noindex, nofollow">
+<link rel="icon" href="/sophias-garden-preview/static/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/sophias-garden-preview/static/img/favicon-32.png">
+<link rel="apple-touch-icon" href="/sophias-garden-preview/static/img/apple-touch-icon.png">
 <meta property="og:title" content="Log in — Sophia’s Garden Artisan">
 <meta property="og:description" content="Account access for Sophia's Garden (Artisan) Inc. — retailers, budtenders and investors.">
 <meta property="og:type" content="website">
@@ -15,14 +18,16 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/sophias-garden-preview/static/style.css?v=a87ce42e">
-<script src="/sophias-garden-preview/static/interactions.js?v=a87ce42e" defer></script>
+<link rel="stylesheet" href="/sophias-garden-preview/static/style.css?v=6407118a">
+<script src="/sophias-garden-preview/static/interactions.js?v=6407118a" defer></script>
 </head>
 <body>
 <div class="age-gate" id="ageGate" role="dialog" aria-modal="true" aria-labelledby="agTitle" hidden>
  <div class="ag-card">
  <div class="ag-mark"><img class="brand-mark" src="/sophias-garden-preview/static/img/logo-vertical-negative.png" alt="Sophia’s Garden Artisan"></div>
- <h1 id="agTitle">Confirm your age to enter</h1>
+ <!-- h2, not h1: the gate is a modal and its heading must not compete
+ with the page's own h1. Every page previously shipped two h1s. -->
+ <h2 id="agTitle">Confirm your age to enter</h2>
  <p class="ag-sub">This website contains information about cannabis products and is intended for adults of legal age in Canada.</p>
  <form class="ag-form" id="agForm" novalidate>
  <div class="ag-field">
@@ -132,7 +137,7 @@
  <div class="gate-mark"><img class="brand-mark" src="/sophias-garden-preview/static/img/logo-vertical-negative.png" alt="Sophia’s Garden Artisan"></div>
  <p class="kicker">Account access</p>
  <h1>Log in</h1>
- <p class="gate-intro">Enter your access code. Retailers and budtenders reach the trade material; investors reach the corporate documents. The code you hold decides which.</p>
+ <p class="gate-intro">Enter your access code to reach the document library. The code you hold decides which materials you see.</p>
 
  <form class="gate-form" data-gate-form novalidate>
  <label for="pcode">Access code</label>
@@ -142,7 +147,7 @@
  <button class="btn btn-solid" type="submit">Log in</button>
  </form>
 
- <p class="gate-help">Retail accounts are created from the registration form on the For Retailers page — accounts on a business domain are approved automatically. Investor accounts are issued directly by Sophia’s Garden Artisan and are not available by request.</p>
+ <p class="gate-help">Retail accounts are created from the registration form on the For Retailers page — accounts on a business domain are approved automatically, and anything on a personal domain is reviewed first.</p>
  <p class="gate-help"><a href="/sophias-garden-preview/for-retailers/#enquiry">Register as a retailer &rarr;</a></p>
  <p class="demo-note"><strong>Demonstration.</strong>
  This login is a visual walkthrough. The access check runs in the
@@ -275,14 +280,14 @@
  <div class="wrap portal-bar-inner">
  <div>
  <p class="kicker">Sophia’s Garden (Artisan) Inc.</p>
- <p class="portal-title">Investor portal</p>
+ <p class="portal-title">Corporate documents</p>
  </div>
  <button class="btn btn-ghost" type="button" data-signout>Sign out</button>
  </div>
  </div>
 
  <div class="wrap portal-body">
- <p class="portal-lead">Quarterly company documents and corporate updates for existing investors.</p>
+ <p class="portal-lead">Quarterly company documents and corporate updates.</p>
  <p class="demo-note"><strong>Demonstration.</strong>
  This portal is a visual walkthrough. The access check runs in the
  browser and protects nothing — real accounts and real documents are
@@ -309,7 +314,7 @@
  <ul class="doc-list">
  <li class="doc">
  <span class="doc-icon" aria-hidden="true">PDF</span>
- <span class="doc-name">Investor presentation</span>
+ <span class="doc-name">Quarterly presentation</span>
  <span class="doc-state">Awaiting upload</span>
  </li>
  <li class="doc">
