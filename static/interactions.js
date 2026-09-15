@@ -57,7 +57,10 @@
           o = (o * o * o) / ((o * o * o) + Math.pow(1 - o, 3) || 1);
           f.style.opacity = o;
           if (!reduce) {
-            var turn = (clamped - i) * 30;      // degrees
+            // 8 degrees, not 30. With the container shots dropped the
+            // frames are two camera distances rather than two angles,
+            // and a big rotation on those reads as a skew, not a turn.
+            var turn = (clamped - i) * 8;       // degrees
             f.style.transform = 'rotateY(' + turn + 'deg) scale(' + (0.97 + o * 0.03) + ')';
           }
           f.classList.toggle('is-active', d < 0.5);
