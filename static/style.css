@@ -1245,3 +1245,53 @@ ul.tick li::before {
     max-width: none;
   }
 }
+
+/* ---- careers ------------------------------------------------------------
+   Added 2026-09-23. One role today, but the layout has to hold several
+   without redesign, so everything is per-role rather than per-page. */
+.role {
+  background: #fff; border: 1px solid var(--line); border-radius: 18px;
+  padding: 38px 40px; margin-top: 2rem; border-top: 4px solid var(--teal);
+  scroll-margin-top: 110px;
+}
+.role + .role { margin-top: 2.4rem; }
+.role-head {
+  display: flex; gap: 24px; align-items: flex-start;
+  justify-content: space-between; flex-wrap: wrap;
+  border-bottom: 1px solid var(--line); padding-bottom: 1.4rem;
+  margin-bottom: 1.6rem;
+}
+.role-head h2 { margin-bottom: .25em; }
+.role-meta { color: var(--ink-soft); font-size: .94rem; margin-bottom: .35em; }
+.role-pay {
+  font-family: var(--display); font-weight: 700; color: var(--navy);
+  font-size: 1.1rem; margin-bottom: .3em;
+}
+.role-noc {
+  font-size: .8rem; color: var(--ink-soft); letter-spacing: .04em; margin: 0;
+}
+.role h3 {
+  margin-top: 2.2rem; padding-top: 1.4rem;
+  border-top: 1px solid var(--line); font-size: 1.15rem;
+}
+.role-groups { display: grid; gap: 1.6rem; }
+.role-group h4 {
+  font-size: .78rem; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--teal); margin-bottom: .6em;
+}
+.role-exps { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.role-exp {
+  background: var(--mist); border-radius: 12px; padding: 18px 20px;
+}
+.role-exp h4 { font-size: .98rem; margin-bottom: .3em; color: var(--navy); }
+.role-exp p { font-size: .9rem; color: var(--ink-soft); margin: 0; }
+.role-apply {
+  margin-top: 2.2rem; padding: 24px 26px; border-radius: 14px;
+  background: var(--navy); color: #fff;
+}
+.role-apply p { color: rgba(255, 255, 255, .84); margin-bottom: 1.2em; }
+@media (max-width: 760px) {
+  .role { padding: 26px 22px; }
+  .role-exps { grid-template-columns: 1fr; }
+  .role-head { flex-direction: column; }
+}

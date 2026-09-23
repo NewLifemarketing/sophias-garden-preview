@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Careers — Sophia’s Garden Artisan</title>
+<meta name="description" content="Open roles at Sophia's Garden (Artisan) Inc., a federally licensed cannabis processor in Thunder Bay, Ontario. 19+.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="googlebot" content="noindex, nofollow">
+<link rel="icon" href="/sophias-garden-preview/static/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/sophias-garden-preview/static/img/favicon-32.png">
+<link rel="apple-touch-icon" href="/sophias-garden-preview/static/img/apple-touch-icon.png">
+<meta property="og:title" content="Careers — Sophia’s Garden Artisan">
+<meta property="og:description" content="Open roles at Sophia's Garden (Artisan) Inc., a federally licensed cannabis processor in Thunder Bay, Ontario. 19+.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="">
+<meta name="rating" content="adult">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/sophias-garden-preview/static/style.css?v=fc4202a5">
+<script src="/sophias-garden-preview/static/interactions.js?v=fc4202a5" defer></script>
+</head>
+<body>
+<div class="age-gate" id="ageGate" role="dialog" aria-modal="true" aria-labelledby="agTitle" hidden>
+ <div class="ag-card">
+ <div class="ag-mark"><img class="brand-mark" src="/sophias-garden-preview/static/img/logo-vertical-negative.png" alt="Sophia’s Garden Artisan"></div>
+ <!-- h2, not h1: the gate is a modal and its heading must not compete
+ with the page's own h1. Every page previously shipped two h1s. -->
+ <h2 id="agTitle">Confirm your age to enter</h2>
+ <p class="ag-sub">This website contains information about cannabis products and is intended for adults of legal age in Canada.</p>
+ <form class="ag-form" id="agForm" novalidate>
+ <div class="ag-field">
+ <label for="agProv">Province or territory</label>
+ <select id="agProv" name="province" required>
+ <option value="" selected disabled>Select…</option>
+ <option value="AB">Alberta</option><option value="BC">British Columbia</option><option value="MB">Manitoba</option><option value="NB">New Brunswick</option><option value="NL">Newfoundland and Labrador</option><option value="NS">Nova Scotia</option><option value="NT">Northwest Territories</option><option value="NU">Nunavut</option><option value="ON">Ontario</option><option value="PE">Prince Edward Island</option><option value="QC">Quebec</option><option value="SK">Saskatchewan</option><option value="YT">Yukon</option>
+ </select>
+ </div>
+ <div class="ag-field">
+ <label for="agDob">Date of birth</label>
+ <div class="ag-dob">
+ <input type="text" id="agDay" inputmode="numeric" maxlength="2" placeholder="DD" aria-label="Day" required>
+ <input type="text" id="agMonth" inputmode="numeric" maxlength="2" placeholder="MM" aria-label="Month" required>
+ <input type="text" id="agYear" inputmode="numeric" maxlength="4" placeholder="YYYY" aria-label="Year" required>
+ </div>
+ </div>
+ <p class="ag-error" id="agError" role="alert" hidden></p>
+ <button class="btn btn-solid" type="submit" id="agSubmit">Enter site</button>
+ </form>
+ <p class="ag-fine">We ask only to confirm you are of legal age. Your date of birth is checked in your browser and is not stored or sent to us.</p>
+ </div>
+</div>
+<script>
+(function () {
+ var MIN = {"AB": 18, "BC": 19, "MB": 19, "NB": 19, "NL": 19, "NS": 19, "NT": 19, "NU": 19, "ON": 19, "PE": 19, "QC": 21, "SK": 19, "YT": 19};
+ var gate = document.getElementById('ageGate');
+ var form = document.getElementById('agForm');
+ var err = document.getElementById('agError');
+ // Session-only pass: the visitor is NOT remembered between visits, which
+ // is what lets SGA measure repeat access (Legend s.3).
+ function passed() {
+ try { return sessionStorage.getItem('sga_age_ok') === '1'; }
+ catch (e) { return false; }
+ }
+ if (passed()) return;
+ gate.hidden = false;
+ document.documentElement.classList.add('ag-lock');
+
+ function fail(msg) { err.textContent = msg; err.hidden = false; }
+
+ form.addEventListener('submit', function (ev) {
+ ev.preventDefault();
+ err.hidden = true;
+ var prov = document.getElementById('agProv').value;
+ var d = parseInt(document.getElementById('agDay').value, 10);
+ var m = parseInt(document.getElementById('agMonth').value, 10);
+ var y = parseInt(document.getElementById('agYear').value, 10);
+ if (!prov) { return fail('Please select your province or territory.'); }
+ if (!d || !m || !y || y < 1900) { return fail('Please enter your full date of birth.'); }
+ var dob = new Date(y, m - 1, d);
+ if (dob.getDate() !== d || dob.getMonth() !== m - 1 || dob.getFullYear() !== y) {
+ return fail('That date does not look right. Please check and try again.');
+ }
+ var now = new Date();
+ var age = now.getFullYear() - y;
+ var before = (now.getMonth() < m - 1) || (now.getMonth() === m - 1 && now.getDate() < d);
+ if (before) { age--; }
+ var need = MIN[prov] || 19;
+ if (age < need) {
+ // A visitor who does not meet the age requirement goes nowhere.
+ return fail('You must be ' + need + ' or older to enter this site in that province.');
+ }
+ try { sessionStorage.setItem('sga_age_ok', '1'); } catch (e) {}
+ gate.hidden = true;
+ document.documentElement.classList.remove('ag-lock');
+ });
+})();
+</script>
+<div class="topbar">
+ <div class="wrap topbar-inner">
+ <a href="/sophias-garden-preview/contact/">Contact Us</a>
+ <a href="/sophias-garden-preview/careers/">Careers</a>
+ <a href="/sophias-garden-preview/blog/">Blog</a>
+ <a href="/sophias-garden-preview/servicing-areas/">Servicing Areas</a>
+ </div>
+</div>
+<header class="site-header">
+ <div class="wrap header-inner">
+ <a class="logo" href="/sophias-garden-preview/" aria-label="Sophia’s Garden Artisan — home">
+ <img class="brand-logo" src="/sophias-garden-preview/static/img/logo.png" alt="Sophia’s Garden Artisan">
+ </a>
+ <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false"></button>
+ <nav class="site-nav" id="siteNav" aria-label="Main">
+ <a href="/sophias-garden-preview/">Home</a>
+ <div class="nav-drop">
+ <a href="/sophias-garden-preview/products/">Products</a>
+ <ul class="drop-menu drop-wide"><li class="drop-head">Euphoreal</li><li><a href="/sophias-garden-preview/brands/euphoreal/#zero">Zero <em>0 mg THC</em></a></li><li><a href="/sophias-garden-preview/brands/euphoreal/#micro">Micro <em>1 mg THC per piece</em></a></li><li><a href="/sophias-garden-preview/brands/euphoreal/#byte">Byte <em>5 mg THC per piece</em></a></li><li class="drop-sku"><a href="/sophias-garden-preview/products/zero-zest/">Zero Zest</a></li><li class="drop-sku"><a href="/sophias-garden-preview/products/micro-zen-milk/">Micro Zen Milk</a></li><li class="drop-sku"><a href="/sophias-garden-preview/products/micro-zest-yuzu/">Micro Zest Yuzu</a></li><li class="drop-sku"><a href="/sophias-garden-preview/products/micro-zen-dark/">Micro Zen Dark</a></li><li class="drop-sku"><a href="/sophias-garden-preview/products/micro-zest-raspberry/">Micro Zest Raspberry</a></li><li class="drop-sku"><a href="/sophias-garden-preview/products/byte-salted-caramel/">Byte Salted Caramel</a></li><li class="drop-head">Infyn Extracts</li><li class="drop-sku"><a href="/sophias-garden-preview/products/xtract/">Xtract</a></li></ul>
+ </div>
+ <div class="nav-drop">
+ <a href="/sophias-garden-preview/product-innovation/">Capabilities</a>
+ <ul class="drop-menu"><li><a href="/sophias-garden-preview/product-innovation/">Product Innovation</a></li><li><a href="/sophias-garden-preview/cannabinoid-formulation-science/">Formulation Science</a></li><li><a href="/sophias-garden-preview/canadian-craft-manufacturing/">Craft Manufacturing</a></li><li><a href="/sophias-garden-preview/co-manufacturing/">Co-Manufacturing</a></li><li><a href="/sophias-garden-preview/responsible-consumption/">Responsible Consumption</a></li></ul>
+ </div>
+ <a href="/sophias-garden-preview/our-story/">Company</a>
+ <a href="/sophias-garden-preview/education/">Education</a>
+ <a href="/sophias-garden-preview/where-to-buy/">Where to Buy</a>
+ <a href="/sophias-garden-preview/for-retailers/">Retailers</a>
+ <a class="nav-login" href="/sophias-garden-preview/login/">Login</a>
+ </nav>
+ </div>
+</header>
+
+<section class="page-hero">
+ <div class="wrap">
+ <p class="kicker">Careers</p>
+ <h1>Work at Sophia’s Garden Artisan</h1>
+ <p class="hero-sub">We are a federally licensed cannabis processor in Thunder Bay, manufacturing precision-dosed products under our own brands and under contract for other licence holders. Formulation, production and quality all sit in the same building, which means the people who design a product are in the room when it is made.</p>
+ </div>
+</section>
+
+<section class="section">
+ <div class="wrap">
+ <p class="kicker">Why here</p>
+ <h2>What the work is actually like</h2>
+ <p class="section-sub">The company is expanding capacity and bringing new products to market, so the roles we open tend to sit close to that growth rather than around it.</p>
+ <div class="diff-grid">
+ <div class="diff-item" data-reveal data-reveal-delay="0">
+ <h3>One building, one team</h3><p>Formulation, production and quality are not separate departments in separate places. A specification question gets answered by walking twenty feet.</p>
+ </div>
+ <div class="diff-item" data-reveal data-reveal-delay="80">
+ <h3>Regulated work, done properly</h3><p>Everything here is built to the Cannabis Regulations and released by a quality assurance person. Nothing ships on commercial judgement alone.</p>
+ </div>
+ <div class="diff-item" data-reveal data-reveal-delay="160">
+ <h3>A real manufacturing record</h3><p>More than thirty cannabis SKUs produced since 2022 and over a million units delivered. New work here builds on a line that already runs.</p>
+ </div></div>
+ </div>
+</section>
+
+<section class="section section-tint">
+ <div class="wrap narrow">
+ <p class="kicker">Open roles</p>
+ <h2>One role open right now</h2>
+ 
+ <article class="role" id="product-coordinator">
+ <div class="role-head">
+ <div>
+ <h2>Product Coordinator</h2>
+ <p class="role-meta">Thunder Bay, Ontario &middot; Full-time &middot; In person, on site</p>
+ <p class="role-pay">$50,000 – $55,000 per year</p>
+ <p class="role-noc">NOC 2021: 22211 — Industrial designers (TEER 2)</p>
+ </div>
+ <a class="btn btn-solid" href="https://ca.indeed.com/viewjob?jk=f66a9146d1a6bb1e" rel="noopener nofollow" target="_blank">Apply on Indeed</a>
+ </div>
+ <p class="section-lead">The Product Coordinator is accountable for the design and development of SGA products, from the first concept to a product that is accepted by provincial distributors and running on the production floor.</p>
+ <p>The role works with Management, Production, Procurement and Quality to establish product requirements, research ingredients, packaging materials and production methods, and turn each concept into approved specifications, label and packaging artwork, and a production-ready product. The Product Coordinator also owns the submission packages sent to provincial distributors and keeps product data accurate for the life of each SKU.</p>
+
+ <h3>What the role does</h3>
+ <div class="role-groups">
+ <div class="role-group">
+ <h4>Product requirements and concept development</h4>
+ <ul class="tick"><li>Consult with Management, Production, Procurement and Quality to establish the requirements for each new product, including format, dose, target consumer, price point and regulatory limits.</li><li>Analyze the intended use of each product and consumer preferences, using market feedback, provincial distributor category direction and sales data.</li><li>Research the properties, availability and cost of ingredients and packaging materials, and the production methods available at SGA, to confirm a concept can be made.</li><li>Present product concepts, with cost estimates and a recommendation, to Management for a go or no-go decision.</li></ul>
+ </div>
+ <div class="role-group">
+ <h4>Product design, labels and packaging</h4>
+ <ul class="tick"><li>Develop product concepts, sketches, mock-ups and visual designs for Management approval.</li><li>Create and revise product labels and packaging artwork in Adobe Photoshop and Illustrator, in line with Part 7 (Packaging and Labelling) of the Cannabis Regulations and provincial distributor requirements.</li><li>Prepare label proofs for Quality review and approval before printing, and coordinate print orders with suppliers.</li><li>Produce product images and visual assets, or coordinate external photographers and designers when needed, and hold them to agreed timelines.</li></ul>
+ </div>
+ <div class="role-group">
+ <h4>Specifications and production handover</h4>
+ <ul class="tick"><li>Prepare product specifications, bills of materials, packaging specifications and production guidelines for each SKU.</li><li>Coordinate prototypes and pilot batches with Production and Quality, and document the results and resulting changes.</li><li>Consult with Production and Quality during first production runs and resolve design or specification issues as they arise.</li><li>Manage formulation, packaging and label changes through the change control process, and keep every affected document current.</li></ul>
+ </div>
+ <div class="role-group">
+ <h4>Provincial submissions</h4>
+ <ul class="tick"><li>Prepare and assemble product submission packages for provincial distributors, with product specifications, pricing, label artwork, images and required regulatory documents.</li><li>Prepare and track Notice of New Cannabis Product (NNCP) documentation.</li><li>Track submission deadlines, coordinate product calls, and keep a record of every submission and its outcome.</li></ul>
+ </div>
+ <div class="role-group">
+ <h4>Product data and post-acceptance support</h4>
+ <ul class="tick"><li>Act as the single source of truth for product information in the ERP/QMS, including recipes, specifications, labels, costs, GTINs and quality documents.</li><li>For accepted products, provide provincial distributors with images, GTINs (unit and case) and product attributes, and keep listings current.</li><li>Update product information across internal records and distributor platforms when formulations, packaging or pricing change.</li><li>Prepare sell sheets, product one-pagers and listing copy for the Commercial team.</li></ul>
+ </div>
+ <div class="role-group">
+ <h4>Continuous improvement</h4>
+ <ul class="tick"><li>Identify ways to shorten the time from concept to accepted product and improve the product development process.</li><li>Contribute to forecasts and product performance reviews.</li><li>Other duties as required by SGA senior management.</li></ul>
+ </div></div>
+
+ <h3>What we are looking for</h3>
+ <div class="role-exps">
+ <div class="role-exp"><h4>Product design and development</h4><p>Experience taking a consumer product from concept to production, including requirements, specifications and prototypes, preferably in food, confectionery, CPG or another regulated manufacturing setting.</p></div>
+ <div class="role-exp"><h4>Design software</h4><p>Proficiency in Adobe Photoshop and Illustrator for label and packaging artwork. Experience preparing print-ready files is an asset.</p></div>
+ <div class="role-exp"><h4>Regulatory knowledge</h4><p>Knowledge of cannabis packaging and labelling requirements and provincial distributor submission processes is an asset.</p></div>
+ <div class="role-exp"><h4>Project management</h4><p>Ability to manage several products at different stages at once, track timelines and meet submission deadlines.</p></div>
+ <div class="role-exp"><h4>Data management</h4><p>Proficiency in Microsoft Office (Excel, Word, PowerPoint) and experience with ERP/QMS or product data systems. Strong numerical skills and attention to detail.</p></div>
+ <div class="role-exp"><h4>Cross-functional collaboration</h4><p>Works well with Production, Procurement, Quality and Commercial teams, and with external suppliers and service providers.</p></div></div>
+
+ <h3>Qualifications</h3>
+ <ul class="tick"><li>College diploma or university degree in Industrial Design, Packaging Design, Food Product Development, Engineering or a related field.</li><li>A portfolio of design work (product, packaging or label design) submitted with the application.</li><li>One to three years of experience in product development, product design or product coordination, preferably in the cannabis, food or CPG industries.</li><li>Experience with provincial cannabis board submissions is an asset.</li><li>Must be legally eligible to work in Canada.</li><li>Must be able to pass a background check.</li><li>Security clearance is not required for this role.</li></ul>
+
+ <h3>Conditions</h3>
+ <ul class="tick"><li>This is an in-office position in Thunder Bay. You must be able to reliably commute to Thunder Bay, ON P7E 6P8, or plan to relocate before starting work.</li><li>English is required.</li><li>We are not able to sponsor a person into Canada for this role. We are looking for candidates from within Canada only.</li></ul>
+
+ <h3>Benefits</h3>
+ <ul class="tick"><li>Casual dress</li><li>On-site parking</li></ul>
+
+ <div class="role-apply">
+ <p>Applications are handled through Indeed, which is where the posting lives and where we track candidates. The Product Coordinator role asks for a portfolio of design work with the application.</p>
+ <a class="btn btn-solid" href="https://ca.indeed.com/viewjob?jk=f66a9146d1a6bb1e" rel="noopener nofollow" target="_blank">Apply for Product Coordinator</a>
+ </div>
+ </article>
+ </div>
+</section>
+
+<section class="section">
+ <div class="wrap narrow center">
+ <p class="kicker">Nothing that fits?</p>
+ <h2>Send us something anyway</h2>
+ <p>Not the right role, but the right place? Send a CV to our general address and tell us what you would want to work on.</p>
+ <div class="center-actions">
+ <a class="btn btn-ghost" href="mailto:contact@sophiasartisan.com?subject=Speculative%20application">contact@sophiasartisan.com</a>
+ </div>
+ </div>
+</section>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "JobPosting", "title": "Product Coordinator", "description": "The Product Coordinator is accountable for the design and development of SGA products, from the first concept to a product that is accepted by provincial distributors and running on the production floor. The role works with Management, Production, Procurement and Quality to establish product requirements, research ingredients, packaging materials and production methods, and turn each concept into approved specifications, label and packaging artwork, and a production-ready product. The Product Coordinator also owns the submission packages sent to provincial distributors and keeps product data accurate for the life of each SKU. Consult with Management, Production, Procurement and Quality to establish the requirements for each new product, including format, dose, target consumer, price point and regulatory limits. Analyze the intended use of each product and consumer preferences, using market feedback, provincial distributor category direction and sales data. Research the properties, availability and cost of ingredients and packaging materials, and the production methods available at SGA, to confirm a concept can be made. Present product concepts, with cost estimates and a recommendation, to Management for a go or no-go decision. Develop product concepts, sketches, mock-ups and visual designs for Management approval. Create and revise product labels and packaging artwork in Adobe Photoshop and Illustrator, in line with Part 7 (Packaging and Labelling) of the Cannabis Regulations and provincial distributor requirements. Prepare label proofs for Quality review and approval before printing, and coordinate print orders with suppliers. Produce product images and visual assets, or coordinate external photographers and designers when needed, and hold them to agreed timelines. Prepare product specifications, bills of materials, packaging specifications and production guidelines for each SKU. Coordinate prototypes and pilot batches with Production and Quality, and document the results and resulting changes. Consult with Production and Quality during first production runs and resolve design or specification issues as they arise. Manage formulation, packaging and label changes through the change control process, and keep every affected document current. Prepare and assemble product submission packages for provincial distributors, with product specifications, pricing, label artwork, images and required regulatory documents. Prepare and track Notice of New Cannabis Product (NNCP) documentation. Track submission deadlines, coordinate product calls, and keep a record of every submission and its outcome. Act as the single source of truth for product information in the ERP/QMS, including recipes, specifications, labels, costs, GTINs and quality documents. For accepted products, provide provincial distributors with images, GTINs (unit and case) and product attributes, and keep listings current. Update product information across internal records and distributor platforms when formulations, packaging or pricing change. Prepare sell sheets, product one-pagers and listing copy for the Commercial team. Identify ways to shorten the time from concept to accepted product and improve the product development process. Contribute to forecasts and product performance reviews. Other duties as required by SGA senior management.", "datePosted": "2026-09-23", "employmentType": "FULL_TIME", "hiringOrganization": {"@type": "Organization", "name": "Sophia's Garden (Artisan) Inc.", "sameAs": "https://www.sophiasartisan.com"}, "jobLocation": {"@type": "Place", "address": {"@type": "PostalAddress", "streetAddress": "600 Montreal St.", "addressLocality": "Thunder Bay", "addressRegion": "ON", "postalCode": "P7E 6P8", "addressCountry": "CA"}}, "baseSalary": {"@type": "MonetaryAmount", "currency": "CAD", "value": {"@type": "QuantitativeValue", "minValue": 50000, "maxValue": 55000, "unitText": "YEAR"}}, "directApply": false, "url": "https://ca.indeed.com/viewjob?jk=f66a9146d1a6bb1e"}</script>
+
+<section class="section section-tint">
+ <div class="wrap narrow">
+ <p class="kicker" data-reveal>Questions</p>
+ <h2 data-reveal>Common questions</h2>
+ <div data-reveal data-reveal-delay="60">
+ <details class="faq">
+ <summary>What roles are open right now?</summary>
+ <p>One: Product Coordinator, based in Thunder Bay. The full posting is on this page, and applications go through Indeed.</p>
+ </details>
+ <details class="faq">
+ <summary>Do you hire outside Thunder Bay?</summary>
+ <p>The current role is on site in Thunder Bay. We are not able to sponsor anyone into Canada for it, so applicants need to be legally eligible to work here already.</p>
+ </details>
+ <details class="faq">
+ <summary>Do I need cannabis industry experience?</summary>
+ <p>Not for the Product Coordinator role. Experience in food, confectionery or another regulated manufacturing setting counts, and knowledge of cannabis packaging rules is listed as an asset rather than a requirement.</p>
+ </details>
+ <details class="faq">
+ <summary>Do I need a security clearance?</summary>
+ <p>Not for this role. A background check is required.</p>
+ </details>
+ <details class="faq">
+ <summary>Can I apply if nothing is posted?</summary>
+ <p>Yes. Send a CV to contact@sophiasartisan.com with a note about the work you want to do and we will keep it on file.</p>
+ </details></div>
+ </div>
+</section>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What roles are open right now?","acceptedAnswer":{"@type":"Answer","text":"One: Product Coordinator, based in Thunder Bay. The full posting is on this page, and applications go through Indeed."}},{"@type":"Question","name":"Do you hire outside Thunder Bay?","acceptedAnswer":{"@type":"Answer","text":"The current role is on site in Thunder Bay. We are not able to sponsor anyone into Canada for it, so applicants need to be legally eligible to work here already."}},{"@type":"Question","name":"Do I need cannabis industry experience?","acceptedAnswer":{"@type":"Answer","text":"Not for the Product Coordinator role. Experience in food, confectionery or another regulated manufacturing setting counts, and knowledge of cannabis packaging rules is listed as an asset rather than a requirement."}},{"@type":"Question","name":"Do I need a security clearance?","acceptedAnswer":{"@type":"Answer","text":"Not for this role. A background check is required."}},{"@type":"Question","name":"Can I apply if nothing is posted?","acceptedAnswer":{"@type":"Answer","text":"Yes. Send a CV to contact@sophiasartisan.com with a note about the work you want to do and we will keep it on file."}}]}</script><footer class="site-footer">
+ <div class="wrap">
+ <div class="foot-warning">
+ <strong>Health warning</strong>
+ 
+ </div>
+ <div class="foot-grid">
+ <div class="foot-brand">
+ <img class="brand-mark" src="/sophias-garden-preview/static/img/logo-vertical-negative.png" alt="Sophia’s Garden Artisan">
+ <p class="foot-name">Sophia's Garden (Artisan) Inc.</p>
+ <p>600 Montreal St., Thunder Bay, ON P7E 6P8, Canada</p>
+ <p><a href="tel:+18558885877">+1 (855) 888-5877</a><br>
+ <a href="mailto:contact@sophiasartisan.com">contact@sophiasartisan.com</a></p>
+ <p>Licensed by Health Canada &middot; Federally licensed producer</p>
+ </div>
+ <div class="foot-col">
+ <h4>Explore</h4>
+ <a href="/sophias-garden-preview/products/">Our Brands</a>
+ <a href="/sophias-garden-preview/brands/euphoreal/">Euphoreal</a>
+ <a href="/sophias-garden-preview/brands/infyn-extracts/">Infyn Extracts</a>
+ <a href="/sophias-garden-preview/our-story/">The Company</a>
+ <a href="/sophias-garden-preview/product-innovation/">Product Innovation</a>
+ <a href="/sophias-garden-preview/cannabinoid-formulation-science/">Formulation Science</a>
+ <a href="/sophias-garden-preview/canadian-craft-manufacturing/">Craft Manufacturing</a>
+ <a href="/sophias-garden-preview/co-manufacturing/">Co-Manufacturing</a>
+ <a href="/sophias-garden-preview/responsible-consumption/">Responsible Consumption</a>
+ <a href="/sophias-garden-preview/education/">Education</a>
+ <a href="/sophias-garden-preview/blog/">Blog</a>
+ <a href="/sophias-garden-preview/where-to-buy/">Where to Buy</a>
+ <a href="/sophias-garden-preview/servicing-areas/">Servicing Areas</a>
+ <a href="/sophias-garden-preview/careers/">Careers</a>
+ <a href="/sophias-garden-preview/for-retailers/">For Retailers</a>
+ <a href="/sophias-garden-preview/login/">Login</a>
+ <a href="/sophias-garden-preview/contact/">Contact</a>
+ </div>
+ <div class="foot-col">
+ <h4>Legal</h4>
+ <a href="/sophias-garden-preview/privacy/">Privacy Policy</a>
+ <a href="/sophias-garden-preview/terms/">Terms of Use</a>
+ <a href="/sophias-garden-preview/accessibility/">Accessibility</a>
+ 
+ </div>
+ </div>
+ <div class="foot-bottom">
+ <p>19+ &mdash; This site is intended for adults of legal age in Canada. Cannabis products are sold only through authorized retailers.</p>
+ <p>&copy; 2026 Sophia's Garden (Artisan) Inc. All rights reserved. Site by <a href="https://newlifemarketing.ca">Newlife Marketing</a>.</p>
+ </div>
+ </div>
+</footer>
+<script>
+(function () {
+ var t = document.getElementById('navToggle'), n = document.getElementById('siteNav');
+ t.addEventListener('click', function () {
+ var open = n.classList.toggle('open');
+ t.setAttribute('aria-expanded', open ? 'true' : 'false');
+ });
+})();
+</script>
+</body>
+</html>
