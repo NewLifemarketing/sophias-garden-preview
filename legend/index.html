@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sophia's Garden Website Legend</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="googlebot" content="noindex, nofollow">
+<style>body{margin:0}</style>
+</head>
+<body>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400&display=swap">
+<style>
+/* Layout: one column per page category, side by side. Nothing else.
+   Palette from the client's brand guide (p12). */
+:root{
+  --navy:#072733; --teal:#66B6AF;
+  --bg:#F3F6F6; --surface:#FFFFFF; --fg:#0B2B37; --fg-soft:#5A757F;
+  --line:rgba(7,39,51,.12); --accent:#2E7F7A;
+  --display:"Outfit","Segoe UI",system-ui,sans-serif;
+  --body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#061F29; --surface:#0C2C38; --fg:#E6EFF0; --fg-soft:#9BB6BE;
+  --line:rgba(230,239,240,.15); --accent:#8FD3CD; color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#061F29; --surface:#0C2C38; --fg:#E6EFF0; --fg-soft:#9BB6BE;
+  --line:rgba(230,239,240,.15); --accent:#8FD3CD; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);
+  font-size:15px;line-height:1.5;margin:0}
+.wrap{max-width:1140px;margin:0 auto;padding-inline:22px}
+
+header{background:var(--navy);color:#fff;padding-block:30px 26px;
+  border-bottom:4px solid var(--teal)}
+header p.k{font-family:var(--mono);font-size:.7rem;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--teal);margin:0 0 10px}
+header h1{font-family:var(--display);font-size:clamp(1.6rem,4vw,2.2rem);
+  font-weight:700;color:#fff;letter-spacing:-.02em;margin:0;
+  text-wrap:balance}
+header a{color:#84C28D;font-family:var(--mono);font-size:.78rem;
+  word-break:break-all;display:inline-block;margin-top:14px}
+
+main{padding-block:32px 48px}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));
+  gap:16px;align-items:start}
+.col{background:var(--surface);border:1px solid var(--line);
+  border-radius:9px;padding:16px 17px;min-width:0}
+.col h2{font-family:var(--display);font-size:.98rem;font-weight:600;
+  margin:0 0 3px;text-wrap:balance}
+.col .count{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--accent);display:block;
+  margin-bottom:12px}
+.col ul{list-style:none;margin:0;padding:0}
+.col li{padding:7px 0;border-top:1px solid var(--line);min-width:0}
+.col li:first-child{border-top:0;padding-top:0}
+.col b{display:block;font-weight:500;font-size:.9rem;color:var(--fg);
+  overflow-wrap:anywhere}
+.col code{display:block;font-family:var(--mono);font-size:.72rem;
+  color:var(--fg-soft);overflow-wrap:anywhere;margin-top:1px}
+.col p.note{font-size:.8rem;color:var(--fg-soft);margin:10px 0 0}
+</style>
+
+<header>
+  <div class="wrap">
+    <p class="k">Sophia's Garden (Artisan) Inc.</p>
+    <h1>Website legend</h1>
+    <a href="https://newlifemarketing.github.io/sophias-garden-preview/">newlifemarketing.github.io/sophias-garden-preview</a>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="cols">
+
+      <div class="col">
+        <h2>Home</h2><span class="count">1 page</span>
+        <ul>
+          <li><b>Home</b><code>/</code></li>
+        </ul>
+      </div>
+
+      <div class="col">
+        <h2>Brands &amp; products</h2><span class="count">10 pages</span>
+        <ul>
+          <li><b>Our brands</b><code>/products/</code></li>
+          <li><b>Euphoreal</b><code>/brands/euphoreal/</code></li>
+          <li><b>Infyn Extracts</b><code>/brands/infyn-extracts/</code></li>
+          <li><b>Zero Zest</b><code>/products/zero-zest/</code></li>
+          <li><b>Micro Zen Milk</b><code>/products/micro-zen-milk/</code></li>
+          <li><b>Micro Zest Yuzu</b><code>/products/micro-zest-yuzu/</code></li>
+          <li><b>Micro Zen Dark</b><code>/products/micro-zen-dark/</code></li>
+          <li><b>Micro Zest Raspberry</b><code>/products/micro-zest-raspberry/</code></li>
+          <li><b>Byte Salted Caramel</b><code>/products/byte-salted-caramel/</code></li>
+          <li><b>Xtract</b><code>/products/xtract/</code></li>
+        </ul>
+      </div>
+
+      <div class="col">
+        <h2>Capabilities</h2><span class="count">5 pages</span>
+        <ul>
+          <li><b>Product Innovation</b><code>/product-innovation/</code></li>
+          <li><b>Formulation Science</b><code>/cannabinoid-formulation-science/</code></li>
+          <li><b>Craft Manufacturing</b><code>/canadian-craft-manufacturing/</code></li>
+          <li><b>Co-Manufacturing</b><code>/co-manufacturing/</code></li>
+          <li><b>Responsible Consumption</b><code>/responsible-consumption/</code></li>
+        </ul>
+      </div>
+
+      <div class="col">
+        <h2>Company</h2><span class="count">2 pages</span>
+        <ul>
+          <li><b>The Company</b><code>/our-story/</code></li>
+          <li><b>Careers</b><code>/careers/</code></li>
+        </ul>
+      </div>
+
+      <div class="col">
+        <h2>Trade &amp; retail</h2><span class="count">4 pages</span>
+        <ul>
+          <li><b>For Retailers</b><code>/for-retailers/</code></li>
+          <li><b>Where to Buy</b><code>/where-to-buy/</code></li>
+          <li><b>Login</b><code>/login/</code></li>
+          <li><b>Contact</b><code>/contact/</code></li>
+        </ul>
+      </div>
+
+      <div class="col">
+        <h2>Education &amp; blog</h2><span class="count">11 pages</span>
+        <ul>
+          <li><b>Education</b><code>/education/</code></li>
+          <li><b>Blog</b><code>/blog/</code></li>
+        </ul>
+        <p class="note">Nine articles under the blog.</p>
+      </div>
+
+      <div class="col">
+        <h2>Servicing areas</h2><span class="count">40 pages</span>
+        <ul>
+          <li><b>Servicing Areas</b><code>/servicing-areas/</code></li>
+        </ul>
+        <p class="note">One page for each of 39 Ontario cities, across seven
+          regions.</p>
+      </div>
+
+      <div class="col">
+        <h2>Legal</h2><span class="count">3 pages</span>
+        <ul>
+          <li><b>Privacy Policy</b><code>/privacy/</code></li>
+          <li><b>Terms of Use</b><code>/terms/</code></li>
+          <li><b>Accessibility</b><code>/accessibility/</code></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<div style="max-width:1140px;margin:0 auto;padding:0 22px 40px">
+  <a href="/sophias-garden-preview/" style="font:400 .82rem/1.5 system-ui,sans-serif;color:#2E7F7A">&larr; Back to the site</a>
+</div>
+</body>
+</html>
