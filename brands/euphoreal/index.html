@@ -18,8 +18,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/sophias-garden-preview/static/style.css?v=fc4202a5">
-<script src="/sophias-garden-preview/static/interactions.js?v=fc4202a5" defer></script>
+<link rel="stylesheet" href="/sophias-garden-preview/static/style.css?v=f96ecd49">
+<script src="/sophias-garden-preview/static/interactions.js?v=f96ecd49" defer></script>
 </head>
 <body>
 <div class="age-gate" id="ageGate" role="dialog" aria-modal="true" aria-labelledby="agTitle" hidden>
@@ -176,7 +176,7 @@
  <h4>ZERO ZEST</h4>
  <p class="prod-meta">CBG Matcha Chocolate</p>
  <p class="prod-dose">0 mg THC / 20 mg CBG per piece</p>
- <p class="prod-avail"><span class="avail avail-submitted">In development</span></p>
+ <p class="prod-avail"><span class="avail avail-listed">Listed with OCS</span> <span>Approved by the OCS. Pre-launch — no purchase order yet.</span></p>
  </div>
  </a></div>
  </div>
@@ -213,7 +213,7 @@
  <h4>MICRO ZEN DARK</h4>
  <p class="prod-meta">1 mg THC : 5 mg CBD Dark Chocolate</p>
  <p class="prod-dose">1 mg THC / 5 mg CBD per piece</p>
- <p class="prod-avail"><span class="avail avail-submitted">In development</span></p>
+ <p class="prod-avail"><span class="avail avail-listed">Listed with OCS</span> <span>Approved by the OCS. Pre-launch — no purchase order yet.</span></p>
  </div>
  </a>
  <a class="bp-sku" href="/sophias-garden-preview/products/micro-zest-raspberry/" style="--drop:#E6553E">
@@ -222,7 +222,7 @@
  <h4>MICRO ZEST RASPBERRY</h4>
  <p class="prod-meta">1 mg THC : 5 mg CBG Raspberry Chocolate</p>
  <p class="prod-dose">1 mg THC / 5 mg CBG per piece</p>
- <p class="prod-avail"><span class="avail avail-submitted">In development</span></p>
+ <p class="prod-avail"><span class="avail avail-listed">Listed with OCS</span> <span>Approved by the OCS. Pre-launch — no purchase order yet.</span></p>
  </div>
  </a></div>
  </div>
@@ -289,15 +289,17 @@
  </details>
  <details class="faq">
  <summary>Which Euphoreal products can I buy today?</summary>
- <p>MICRO ZEN MILK and MICRO ZEST YUZU are approved by the OCS and are pre-launch. The rest of the range is in development. Each SKU on this site carries its own status label.</p>
+ <p>Every Euphoreal product except BYTE SALTED CARAMEL is approved by the OCS and pre-launch; BYTE SALTED CARAMEL is in development. Each SKU on this site carries its own status label.</p>
  </details></div>
  </div>
 </section>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is Euphoreal?","acceptedAnswer":{"@type":"Answer","text":"Our edibles brand. It is organised as a dose ladder in three collections \u2014 Zero, Micro and Byte \u2014 so that the first thing you learn about any product in it is how much THC is in one piece."}},{"@type":"Question","name":"Why separate Zero into its own collection?","acceptedAnswer":{"@type":"Answer","text":"Because its defining promise is 0 mg of THC, which is a different proposition rather than a smaller version of Micro. A 1 mg microdose is still THC. Zero is for the consumer who is specifically choosing a product without it."}},{"@type":"Question","name":"Are all Euphoreal products chocolate?","acceptedAnswer":{"@type":"Answer","text":"So far, yes. Chocolate is where our deepest manufacturing capability sits. The brand is defined by dose architecture rather than by format, so that is not a permanent constraint."}},{"@type":"Question","name":"Which Euphoreal products can I buy today?","acceptedAnswer":{"@type":"Answer","text":"MICRO ZEN MILK and MICRO ZEST YUZU are approved by the OCS and are pre-launch. The rest of the range is in development. Each SKU on this site carries its own status label."}}]}</script><footer class="site-footer">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is Euphoreal?","acceptedAnswer":{"@type":"Answer","text":"Our edibles brand. It is organised as a dose ladder in three collections \u2014 Zero, Micro and Byte \u2014 so that the first thing you learn about any product in it is how much THC is in one piece."}},{"@type":"Question","name":"Why separate Zero into its own collection?","acceptedAnswer":{"@type":"Answer","text":"Because its defining promise is 0 mg of THC, which is a different proposition rather than a smaller version of Micro. A 1 mg microdose is still THC. Zero is for the consumer who is specifically choosing a product without it."}},{"@type":"Question","name":"Are all Euphoreal products chocolate?","acceptedAnswer":{"@type":"Answer","text":"So far, yes. Chocolate is where our deepest manufacturing capability sits. The brand is defined by dose architecture rather than by format, so that is not a permanent constraint."}},{"@type":"Question","name":"Which Euphoreal products can I buy today?","acceptedAnswer":{"@type":"Answer","text":"Every Euphoreal product except BYTE SALTED CARAMEL is approved by the OCS and pre-launch; BYTE SALTED CARAMEL is in development. Each SKU on this site carries its own status label."}}]}</script><footer class="site-footer">
  <div class="wrap">
  <div class="foot-warning">
  <strong>Health warning</strong>
- 
+ <p lang="en">WARNING: Using cannabis before age 25 can harm brain development. This can worsen your attention, concentration, and memory, especially when using cannabis every day or most days.</p>
+ <p lang="fr">MISE EN GARDE : Consommer du cannabis avant l'âge de 25 ans peut nuire au développement du cerveau. Le cannabis peut nuire à votre attention, votre concentration et votre mémoire, particulièrement si vous consommez quotidiennement ou quasi quotidiennement.</p>
+ <p class="foot-warning-source">Health Canada / Santé Canada</p>
  </div>
  <div class="foot-grid">
  <div class="foot-brand">
@@ -348,6 +350,62 @@
  t.addEventListener('click', function () {
  var open = n.classList.toggle('open');
  t.setAttribute('aria-expanded', open ? 'true' : 'false');
+ });
+})();
+</script>
+<script>
+(function () {
+ var EP = {"contact": "https://services.leadconnectorhq.com/hooks/kLOZd5bJudAGTqYrbpee/webhook-trigger/d514e7a0-3c4a-421a-8e20-fd8c1d2592ab", "retailer": "https://services.leadconnectorhq.com/hooks/kLOZd5bJudAGTqYrbpee/webhook-trigger/b47921e5-6132-43ed-98a8-f766bd5256d7", "comanufacturing": "https://services.leadconnectorhq.com/hooks/kLOZd5bJudAGTqYrbpee/webhook-trigger/fb914088-404a-4a7c-9e8c-82333b0111dd"};
+ var PHONE = "+1 (855) 888-5877";
+ var EMAIL = "sales@sophiasartisan.com";
+
+ function show(box, kind, html) {
+ box.hidden = false;
+ box.className = "form-status is-" + kind;
+ box.innerHTML = html;
+ }
+
+ document.querySelectorAll("form.sg-form").forEach(function (form) {
+ var key = form.getAttribute("data-form");
+ var box = form.querySelector(".form-status");
+ var btn = form.querySelector("button[type=submit]");
+
+ form.addEventListener("submit", function (ev) {
+ ev.preventDefault();
+ if (!form.reportValidity()) { return; }
+
+ var payload = {};
+ new FormData(form).forEach(function (v, k) { payload[k] = v; });
+
+ var label = btn.textContent;
+ btn.disabled = true;
+ btn.textContent = "Sending…";
+ show(box, "pending", "Sending…");
+
+ fetch(EP[key], {
+ method: "POST",
+ headers: {"Content-Type": "application/json"},
+ body: JSON.stringify(payload)
+ }).then(function (res) {
+ if (res.status >= 200 && res.status < 300) {
+ form.reset();
+ show(box, "ok",
+ "<strong>Thank you — we have your enquiry.</strong> " +
+ "Someone will come back to you shortly.");
+ btn.textContent = "Sent";
+ return;
+ }
+ throw new Error("status " + res.status);
+ }).catch(function () {
+ show(box, "err",
+ "<strong>That did not go through.</strong> Please call " +
+ "<a href="tel:+18558885877">" + PHONE + "</a> or email " +
+ "<a href="mailto:" + EMAIL + "">" + EMAIL + "</a>. " +
+ "Your details are still here.");
+ btn.disabled = false;
+ btn.textContent = label;
+ });
+ });
  });
 })();
 </script>

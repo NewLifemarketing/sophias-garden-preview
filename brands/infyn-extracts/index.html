@@ -18,8 +18,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/sophias-garden-preview/static/style.css?v=fc4202a5">
-<script src="/sophias-garden-preview/static/interactions.js?v=fc4202a5" defer></script>
+<link rel="stylesheet" href="/sophias-garden-preview/static/style.css?v=f96ecd49">
+<script src="/sophias-garden-preview/static/interactions.js?v=f96ecd49" defer></script>
 </head>
 <body>
 <div class="age-gate" id="ageGate" role="dialog" aria-modal="true" aria-labelledby="agTitle" hidden>
@@ -160,7 +160,7 @@
  <h4>XTRACT</h4>
  <p class="prod-meta">Precision-Dosed Uncoated Cannabis Tablets</p>
  <p class="prod-dose">9.5 mg THC per tablet</p>
- <p class="prod-avail"><span class="avail avail-submitted">In development</span></p>
+ <p class="prod-avail"><span class="avail avail-listed">Listed with OCS</span> <span>Approved by the OCS. Pre-launch — no purchase order yet.</span></p>
  </div>
  </a></div>
  </div>
@@ -200,7 +200,7 @@
  </details>
  <details class="faq">
  <summary>What is XTRACT?</summary>
- <p>A precision-dosed uncoated cannabis tablet carrying 9.5 mg of THC, with fifty tablets to a jar. It sits in the capsules category, not edibles, and is currently in development.</p>
+ <p>A precision-dosed uncoated cannabis tablet carrying 9.5 mg of THC, with fifty tablets to a jar. It sits in the capsules category, not edibles, and is approved by the OCS, pre-launch.</p>
  </details>
  <details class="faq">
  <summary>How is an extract tablet different from an infused chocolate?</summary>
@@ -212,11 +212,13 @@
  </details></div>
  </div>
 </section>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is Infyn Extracts?","acceptedAnswer":{"@type":"Answer","text":"Our extracts brand, and a separate brand from Euphoreal. It covers standardised oral formats \u2014 solid units carrying a fixed cannabinoid content with no measuring step and no hardware."}},{"@type":"Question","name":"What is XTRACT?","acceptedAnswer":{"@type":"Answer","text":"A precision-dosed uncoated cannabis tablet carrying 9.5 mg of THC, with fifty tablets to a jar. It sits in the capsules category, not edibles, and is currently in development."}},{"@type":"Question","name":"How is an extract tablet different from an infused chocolate?","acceptedAnswer":{"@type":"Answer","text":"Both are swallowed, so they take the same route through the body. The carrier is what differs: a chocolate disperses its cannabinoid into cocoa butter, while a tablet is a compressed solid with no fat phase, so uniformity is achieved in the blend and the compression instead."}},{"@type":"Question","name":"Why a second brand rather than another Euphoreal collection?","acceptedAnswer":{"@type":"Answer","text":"Because it is a different category, a different consumer and a different shelf. Euphoreal\u2019s ladder is built around edible dose architecture, and a 9.5 mg tablet does not belong on it."}}]}</script><footer class="site-footer">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is Infyn Extracts?","acceptedAnswer":{"@type":"Answer","text":"Our extracts brand, and a separate brand from Euphoreal. It covers standardised oral formats \u2014 solid units carrying a fixed cannabinoid content with no measuring step and no hardware."}},{"@type":"Question","name":"What is XTRACT?","acceptedAnswer":{"@type":"Answer","text":"A precision-dosed uncoated cannabis tablet carrying 9.5 mg of THC, with fifty tablets to a jar. It sits in the capsules category, not edibles, and is approved by the OCS, pre-launch."}},{"@type":"Question","name":"How is an extract tablet different from an infused chocolate?","acceptedAnswer":{"@type":"Answer","text":"Both are swallowed, so they take the same route through the body. The carrier is what differs: a chocolate disperses its cannabinoid into cocoa butter, while a tablet is a compressed solid with no fat phase, so uniformity is achieved in the blend and the compression instead."}},{"@type":"Question","name":"Why a second brand rather than another Euphoreal collection?","acceptedAnswer":{"@type":"Answer","text":"Because it is a different category, a different consumer and a different shelf. Euphoreal\u2019s ladder is built around edible dose architecture, and a 9.5 mg tablet does not belong on it."}}]}</script><footer class="site-footer">
  <div class="wrap">
  <div class="foot-warning">
  <strong>Health warning</strong>
- 
+ <p lang="en">WARNING: Using cannabis before age 25 can harm brain development. This can worsen your attention, concentration, and memory, especially when using cannabis every day or most days.</p>
+ <p lang="fr">MISE EN GARDE : Consommer du cannabis avant l'âge de 25 ans peut nuire au développement du cerveau. Le cannabis peut nuire à votre attention, votre concentration et votre mémoire, particulièrement si vous consommez quotidiennement ou quasi quotidiennement.</p>
+ <p class="foot-warning-source">Health Canada / Santé Canada</p>
  </div>
  <div class="foot-grid">
  <div class="foot-brand">
@@ -267,6 +269,62 @@
  t.addEventListener('click', function () {
  var open = n.classList.toggle('open');
  t.setAttribute('aria-expanded', open ? 'true' : 'false');
+ });
+})();
+</script>
+<script>
+(function () {
+ var EP = {"contact": "https://services.leadconnectorhq.com/hooks/kLOZd5bJudAGTqYrbpee/webhook-trigger/d514e7a0-3c4a-421a-8e20-fd8c1d2592ab", "retailer": "https://services.leadconnectorhq.com/hooks/kLOZd5bJudAGTqYrbpee/webhook-trigger/b47921e5-6132-43ed-98a8-f766bd5256d7", "comanufacturing": "https://services.leadconnectorhq.com/hooks/kLOZd5bJudAGTqYrbpee/webhook-trigger/fb914088-404a-4a7c-9e8c-82333b0111dd"};
+ var PHONE = "+1 (855) 888-5877";
+ var EMAIL = "sales@sophiasartisan.com";
+
+ function show(box, kind, html) {
+ box.hidden = false;
+ box.className = "form-status is-" + kind;
+ box.innerHTML = html;
+ }
+
+ document.querySelectorAll("form.sg-form").forEach(function (form) {
+ var key = form.getAttribute("data-form");
+ var box = form.querySelector(".form-status");
+ var btn = form.querySelector("button[type=submit]");
+
+ form.addEventListener("submit", function (ev) {
+ ev.preventDefault();
+ if (!form.reportValidity()) { return; }
+
+ var payload = {};
+ new FormData(form).forEach(function (v, k) { payload[k] = v; });
+
+ var label = btn.textContent;
+ btn.disabled = true;
+ btn.textContent = "Sending…";
+ show(box, "pending", "Sending…");
+
+ fetch(EP[key], {
+ method: "POST",
+ headers: {"Content-Type": "application/json"},
+ body: JSON.stringify(payload)
+ }).then(function (res) {
+ if (res.status >= 200 && res.status < 300) {
+ form.reset();
+ show(box, "ok",
+ "<strong>Thank you — we have your enquiry.</strong> " +
+ "Someone will come back to you shortly.");
+ btn.textContent = "Sent";
+ return;
+ }
+ throw new Error("status " + res.status);
+ }).catch(function () {
+ show(box, "err",
+ "<strong>That did not go through.</strong> Please call " +
+ "<a href="tel:+18558885877">" + PHONE + "</a> or email " +
+ "<a href="mailto:" + EMAIL + "">" + EMAIL + "</a>. " +
+ "Your details are still here.");
+ btn.disabled = false;
+ btn.textContent = label;
+ });
+ });
  });
 })();
 </script>
