@@ -387,10 +387,13 @@
  }
  throw new Error("status " + res.status);
  }).catch(function () {
+ // single-quoted attributes: escaping double quotes through two
+ // layers of string literal silently dropped the backslashes and
+ // produced invalid JS, which killed the whole handler
  show(box, "err",
  "<strong>That did not go through.</strong> Please call " +
- "<a href="tel:+18558885877">" + PHONE + "</a> or email " +
- "<a href="mailto:" + EMAIL + "">" + EMAIL + "</a>. " +
+ "<a href='tel:+18558885877'>" + PHONE + "</a> or email " +
+ "<a href='mailto:" + EMAIL + "'>" + EMAIL + "</a>. " +
  "Your details are still here.");
  btn.disabled = false;
  btn.textContent = label;
